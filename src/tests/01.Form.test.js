@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from '../App';
 
-describe.only("1 - Crie o formulário que será usado para adicionar cartas ao baralho", () => {
+describe("1 - Crie o formulário que será usado para adicionar cartas ao baralho", () => {
 
   it("Será validado se existe um input texto que possui o `data-testid='name-input'`", () => {
     render(<App />);
