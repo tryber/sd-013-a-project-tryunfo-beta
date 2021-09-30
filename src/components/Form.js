@@ -5,7 +5,7 @@ export default class Form extends React.Component {
   render() {
     const { cardAttr1, cardAttr2, cardAttr3, cardName, cardImage, cardDescription,
       cardRare, cardTrunfo, isSaveButtonDisabled, onInputChange,
-      onSaveButtonClick } = this.props;
+      onSaveButtonClick, hasTrunfo } = this.props;
 
     return (
       <div>
@@ -82,16 +82,17 @@ export default class Form extends React.Component {
             <option value="muito raro">muito raro</option>
           </select>
         </label>
-        <label htmlFor="trunfo">
-          Trunfo:
-          <input
-            onChange={ onInputChange }
-            checked={ cardTrunfo }
-            id="trunfo"
-            data-testid="trunfo-input"
-            type="checkbox"
-          />
-        </label>
+        { (hasTrunfo) ? <span>Você já tem um Super Trunfo em seu baralho</span> : (
+          <label htmlFor="trunfo">
+            Trunfo:
+            <input
+              onChange={ onInputChange }
+              checked={ cardTrunfo }
+              id="trunfo"
+              data-testid="trunfo-input"
+              type="checkbox"
+            />
+          </label>)}
         <button
           onClick={ onSaveButtonClick }
           disabled={ isSaveButtonDisabled }
@@ -109,13 +110,13 @@ Form.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
-  // hasTrunfo: PropTypes.bool.isRequired,
+  hasTrunfo: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   cardName: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
-  cardAttr1: PropTypes.string.isRequired,
-  cardAttr2: PropTypes.string.isRequired,
-  cardAttr3: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.number.isRequired,
+  cardAttr2: PropTypes.number.isRequired,
+  cardAttr3: PropTypes.number.isRequired,
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
 };

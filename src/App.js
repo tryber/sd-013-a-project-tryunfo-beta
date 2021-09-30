@@ -14,7 +14,7 @@ class App extends React.Component {
       rare: 'normal',
       isSaveButtonDisabled: true,
       hasTrunfo: false,
-      cardTrunfo: true,
+      trunfo: false,
       allCards: [],
     };
     this.verifyButtonDisabled = this.verifyButtonDisabled.bind(this);
@@ -40,6 +40,8 @@ class App extends React.Component {
         attr2: 0,
         attr3: 0,
       }));
+      const { trunfo } = this.state;
+      if (trunfo) this.setState(() => ({ hasTrunfo: true }));
     });
   }
 
@@ -61,7 +63,7 @@ class App extends React.Component {
 
   render() {
     const { name, description, attr1, attr2, attr3, image, rare,
-      hasTrunfo, cardTrunfo, isSaveButtonDisabled } = this.state;
+      hasTrunfo, trunfo, isSaveButtonDisabled } = this.state;
 
     return (
       <div>
@@ -74,7 +76,7 @@ class App extends React.Component {
           cardAttr3={ attr3 }
           cardImage={ image }
           cardRare={ rare }
-          cardTrunfo={ cardTrunfo }
+          cardTrunfo={ trunfo }
           hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.handleChange }
@@ -88,7 +90,7 @@ class App extends React.Component {
           cardAttr3={ attr3 }
           cardImage={ image }
           cardRare={ rare }
-          cardTrunfo={ cardTrunfo }
+          cardTrunfo={ trunfo }
         />
       </div>
     );
