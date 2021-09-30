@@ -18,6 +18,7 @@ class App extends React.Component {
       trunfo: false,
       nameFilter: '',
       rareFilter: 'todas',
+      trunfoFilter: false,
     };
     this.verifyButtonDisabled = this.verifyButtonDisabled.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -73,13 +74,14 @@ class App extends React.Component {
 
   render() {
     const { name, description, attr1, attr2, attr3, image, rare, nameFilter, rareFilter,
-      hasTrunfo, trunfo, isSaveButtonDisabled, allCards } = this.state;
+      hasTrunfo, trunfo, isSaveButtonDisabled, allCards, trunfoFilter } = this.state;
 
     return (
       <div>
         <FiltersInputs
-          rareFilter={ rareFilter }
           nameFilter={ nameFilter }
+          rareFilter={ rareFilter }
+          trunfoFilter={ trunfoFilter }
           handleChange={ this.handleChange }
         />
         <Form
@@ -107,8 +109,9 @@ class App extends React.Component {
           cardTrunfo={ trunfo }
         />
         <CardList
-          rareFilter={ rareFilter }
           nameFilter={ nameFilter }
+          rareFilter={ rareFilter }
+          trunfoFilter={ trunfoFilter }
           deleteCard={ this.deleteCard }
           allCards={ allCards }
         />

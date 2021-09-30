@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class FiltersInputs extends Component {
   render() {
-    const { nameFilter, handleChange, rareFilter } = this.props;
+    const { nameFilter, handleChange, rareFilter, trunfoFilter } = this.props;
     return (
       <div>
         <label htmlFor="nameFilter">
@@ -17,7 +17,7 @@ class FiltersInputs extends Component {
           />
         </label>
         <label htmlFor="rareFilter">
-          Filtrar Por Nome:
+          Filtrar Por Raridade:
           <select
             onChange={ handleChange }
             value={ rareFilter }
@@ -31,6 +31,16 @@ class FiltersInputs extends Component {
             <option value="muito raro">muito raro</option>
           </select>
         </label>
+        <label htmlFor="trunfoFilter">
+          Super Trunfo:
+          <input
+            onChange={ handleChange }
+            checked={ trunfoFilter }
+            id="trunfoFilter"
+            data-testid="trunfo-filter"
+            type="checkbox"
+          />
+        </label>
       </div>
     );
   }
@@ -40,6 +50,7 @@ FiltersInputs.propTypes = {
   handleChange: PropTypes.func.isRequired,
   nameFilter: PropTypes.string.isRequired,
   rareFilter: PropTypes.string.isRequired,
+  trunfoFilter: PropTypes.bool.isRequired,
 };
 
 export default FiltersInputs;

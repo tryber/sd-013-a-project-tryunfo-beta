@@ -9,7 +9,8 @@ class CardList extends Component {
   }
 
   filterCards() {
-    const { allCards, nameFilter, rareFilter } = this.props;
+    const { allCards, nameFilter, rareFilter, trunfoFilter } = this.props;
+    if (trunfoFilter) return allCards.filter(({ trunfo }) => trunfo);
     const filterByName = allCards.filter(({ name }) => name.includes(nameFilter));
     if (rareFilter === 'todas') return filterByName;
     return filterByName
@@ -48,6 +49,7 @@ CardList.propTypes = {
   deleteCard: PropTypes.func.isRequired,
   nameFilter: PropTypes.string.isRequired,
   rareFilter: PropTypes.string.isRequired,
+  trunfoFilter: PropTypes.bool.isRequired,
 };
 
 export default CardList;
