@@ -16,7 +16,7 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
-      cardDeck: [],
+      deck: [],
     };
   }
 
@@ -59,10 +59,10 @@ class App extends React.Component {
   }
 
   onSaveButtonClick = () => {
-    const { isSaveButtonDisabled, cardDeck, ...newCard } = this.state;
+    const { isSaveButtonDisabled, deck, ...newCard } = this.state;
     this.setState((state) => (
       {
-        cardDeck: [...state.cardDeck, newCard],
+        deck: [...state.deck, newCard],
         cardName: '',
         cardImage: '',
         cardDescription: '',
@@ -76,13 +76,14 @@ class App extends React.Component {
   }
 
   render() {
-    // const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
-    //   cardRare, cardTrunfo } = this.state;
+    const { deck } = this.state;
+    const hasTrunfo = deck.some(({ cardTrunfo }) => cardTrunfo);
     return (
       <div>
         <div className="form-and-preview">
           <Form
             { ...this.state }
+            hasTrunfo={ hasTrunfo }
             onInputChange={ this.onInputChange }
             onSaveButtonClick={ this.onSaveButtonClick }
           />
