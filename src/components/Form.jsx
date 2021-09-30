@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Input } from '.';
+import Input from './Input';
 
 class Form extends Component {
   render() {
