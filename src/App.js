@@ -9,14 +9,15 @@ class App extends React.Component {
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
-      isSaveButtonDisabled: true,
+      isSaveButtonDisabled: false,
       hasTrunfo: false,
+      gameCards: [],
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -51,7 +52,18 @@ class App extends React.Component {
   }
 
   onSaveButtonClick() {
-    console.log('click');
+    const { gameCards } = this.state;
+    gameCards.push(this.state);
+
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+    });
   }
 
   render() {
