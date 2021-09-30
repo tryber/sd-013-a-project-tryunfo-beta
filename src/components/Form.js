@@ -148,12 +148,14 @@ class Form extends Component {
             value: cardRare,
             onChange: onInputChange,
             name: 'cardRare' })}
-          {this.renderInputCheckBox({
-            title: 'Super Trybe Trunfo',
-            testId: 'trunfo-input',
-            checked: cardTrunfo,
-            onChange: onInputChange,
-            name: 'cardTrunfo' })}
+          { !hasTrunfo
+            ? this.renderInputCheckBox({
+              title: 'Super Trybe Trunfo',
+              testId: 'trunfo-input',
+              checked: cardTrunfo,
+              onChange: onInputChange,
+              name: 'cardTrunfo' })
+            : <p>Você já tem um Super Trunfo em seu baralho</p>}
           {this.renderButton({
             title: 'Salvar',
             disabled: isSaveButtonDisabled,
