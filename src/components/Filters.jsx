@@ -10,12 +10,22 @@ class Filters extends Component {
           <h4>Filtros de busca</h4>
           <input
             type="text"
-            data-testid="name-filter"
             id="filterByName"
+            data-testid="name-filter"
             placeholder="Nome da carta"
             onChange={ onFilterChange }
           />
-
+          <select
+            name="rarity"
+            id="filterByRarity"
+            data-testid="rare-filter"
+            onChange={ onFilterChange }
+          >
+            <option value="todas">Todas</option>
+            <option value="normal">Normal</option>
+            <option value="raro">Raro</option>
+            <option value="muito raro">Muito Raro</option>
+          </select>
         </form>
       </div>
     );

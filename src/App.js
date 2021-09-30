@@ -20,6 +20,7 @@ class App extends React.Component {
       deck: [],
       filters: {
         filterByName: '',
+        filterByRarity: 'todas',
       },
     };
   }
@@ -90,11 +91,15 @@ class App extends React.Component {
   }
 
   filterDeck = () => {
-    const { deck, filters: { filterByName } } = this.state;
+    const { deck, filters: { filterByName, filterByRarity } } = this.state;
 
-    const filteredDeck = deck.filter(({ cardName }) => (
+    let filteredDeck = deck.filter(({ cardName }) => (
       (cardName.toLowerCase()).includes(filterByName.toLowerCase())
     ));
+
+    if (filterByRarity !== 'todas') {
+      filteredDeck = filteredDeck.filter(({ cardRare }) => cardRare === filterByRarity);
+    }
 
     return filteredDeck;
   }
