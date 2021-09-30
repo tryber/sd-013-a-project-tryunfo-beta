@@ -4,3 +4,7 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.card-input-form p {
+  margin: 0;
+}

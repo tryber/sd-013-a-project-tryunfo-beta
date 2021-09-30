@@ -36,26 +36,34 @@ const properties = [
 
 class Input extends Component {
   render() {
-    const { idx } = this.props;
+    const { idx, value, onChange } = this.props;
     return (
-      idx < 2 ? (
+      idx === 1 ? (
         <>
-          <label htmlFor={ properties[idx].id }>{ properties[idx].label }</label>
-          <input
+          <label htmlFor={ properties[idx].id }>
+            { properties[idx].label }
+          </label>
+          <textarea
             type={ properties[idx].type }
             id={ properties[idx].id }
             data-testid={ properties[idx].id }
+            value={ value }
+            onChange={ onChange }
           />
         </>
       ) : (
-        <label htmlFor={ properties[idx].id }>
-          { properties[idx].label }
+        <>
+          <label htmlFor={ properties[idx].id }>
+            { properties[idx].label }
+          </label>
           <input
             type={ properties[idx].type }
             id={ properties[idx].id }
             data-testid={ properties[idx].id }
+            value={ value }
+            onChange={ onChange }
           />
-        </label>
+        </>
       )
     );
   }
@@ -65,4 +73,6 @@ export default Input;
 
 Input.propTypes = {
   idx: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
