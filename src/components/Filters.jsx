@@ -26,6 +26,15 @@ class Filters extends Component {
             <option value="raro">Raro</option>
             <option value="muito raro">Muito Raro</option>
           </select>
+          <label htmlFor="filterByTrunfo">
+            <input
+              type="checkbox"
+              id="filterByTrunfo"
+              data-testid="trunfo-filter"
+              onChange={ onFilterChange }
+            />
+            Super Trunfo
+          </label>
         </form>
       </div>
     );

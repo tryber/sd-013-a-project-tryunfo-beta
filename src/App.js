@@ -21,6 +21,7 @@ class App extends React.Component {
       filters: {
         filterByName: '',
         filterByRarity: 'todas',
+        filterByTrunfo: false,
       },
     };
   }
@@ -86,12 +87,31 @@ class App extends React.Component {
     this.setState({ deck: deck.filter((card) => card.id !== id) });
   }
 
-  onFilterChange = ({ target: { id, value } }) => {
-    this.setState((state) => ({ filters: { ...state.filters, [id]: value } }));
+  onFilterChange = ({ target: { id, value, checked } }) => {
+    if (id === 'filterByTrunfo') {
+      this.setState((state) => ({ filters: { ...state.filters, [id]: checked } }));
+    } else {
+      this.setState((state) => ({ filters: { ...state.filters, [id]: value } }));
+    }
   }
 
   filterDeck = () => {
-    const { deck, filters: { filterByName, filterByRarity } } = this.state;
+    const { deck, filters } = this.state;
+    const { filterByName, filterByRarity, filterByTrunfo } = filters;
+
+    const nameFilterInput = document.querySelector('#filterByName');
+    const rarityFilterInput = document.querySelector('#filterByRarity');
+
+    if (!nameFilterInput && !rarityFilterInput) return [];
+    if (filterByTrunfo) {
+      nameFilterInput.disabled = true;
+      rarityFilterInput.disabled = true;
+      return deck.find(({ cardTrunfo }) => cardTrunfo)
+        ? [deck.find(({ cardTrunfo }) => cardTrunfo)] : [];
+    }
+
+    nameFilterInput.disabled = false;
+    rarityFilterInput.disabled = false;
 
     let filteredDeck = deck.filter(({ cardName }) => (
       (cardName.toLowerCase()).includes(filterByName.toLowerCase())
