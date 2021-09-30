@@ -13,7 +13,7 @@ const defaultProps = {
   cardTrunfo: true,
 }
 
-describe("3 - Crie e renderize o componente Card com as props necessárias", () => {
+describe.only("3 - Crie e renderize o componente Card com as props necessárias", () => {
   it("Será validado se o componente `data-testid=name-card` é exibido e possui o valor da prop `cardName`", () => {
     render(<Card {...defaultProps} />);
     const text = screen.getByTestId(/name-card/i);
