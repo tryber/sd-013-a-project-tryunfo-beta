@@ -4,13 +4,15 @@ import Card from './Card';
 
 class CardList extends Component {
   render() {
-    const { allCards } = this.props;
+    const { allCards, deleteCard } = this.props;
     return (
       <div>
         { (allCards && allCards.length !== 0) && allCards.map(
           ({ name, description, attr1, attr2, attr3, image, rare, trunfo }, index) => (
             <Card
               key={ `${index}-${name}` }
+              deleteBtn
+              deleteCard={ () => deleteCard(index) }
               cardName={ name }
               cardDescription={ description }
               cardAttr1={ attr1 }
@@ -29,6 +31,7 @@ class CardList extends Component {
 
 CardList.propTypes = {
   allCards: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteCard: PropTypes.func.isRequired,
 };
 
 export default CardList;

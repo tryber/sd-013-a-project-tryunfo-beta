@@ -20,6 +20,7 @@ class App extends React.Component {
     this.verifyButtonDisabled = this.verifyButtonDisabled.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.deleteCard = this.deleteCard.bind(this);
   }
 
   handleChange({ target: { value, id, checked, type } }) {
@@ -28,8 +29,8 @@ class App extends React.Component {
   }
 
   onSaveButtonClick() {
-    const { name, description, image, rare, attr3, attr2, attr1 } = this.state;
-    const obj = { name, description, image, rare, attr3, attr2, attr1 };
+    const { name, description, image, rare, attr3, attr2, attr1, trunfo } = this.state;
+    const obj = { name, description, image, rare, attr3, attr2, attr1, trunfo };
     this.setState(({ allCards }) => ({ allCards: [...allCards, obj] }), () => {
       this.setState(() => ({
         name: '',
@@ -40,9 +41,16 @@ class App extends React.Component {
         attr2: 0,
         attr3: 0,
       }));
-      const { trunfo } = this.state;
-      if (trunfo) this.setState(() => ({ hasTrunfo: true }));
+      if (trunfo) this.setState(() => ({ hasTrunfo: true, trunfo: false }));
     });
+  }
+
+  deleteCard(index) {
+    const { allCards } = this.state;
+    const filteredCards = allCards.filter((_, i) => i !== index);
+    const card = allCards.find((_, i) => i === index);
+    if (card.trunfo) this.setState(() => ({ hasTrunfo: false }));
+    this.setState(() => ({ allCards: filteredCards }));
   }
 
   verifyButtonDisabled() {
@@ -92,7 +100,7 @@ class App extends React.Component {
           cardRare={ rare }
           cardTrunfo={ trunfo }
         />
-        <CardList allCards={ allCards } />
+        <CardList deleteCard={ this.deleteCard } allCards={ allCards } />
       </div>
     );
   }

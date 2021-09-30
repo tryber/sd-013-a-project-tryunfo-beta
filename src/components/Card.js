@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Card extends Component {
   render() {
     const { cardName, cardDescription, cardImage, cardAttr1, cardAttr2,
-      cardAttr3, cardRare, cardTrunfo } = this.props;
+      cardAttr3, cardRare, cardTrunfo, deleteBtn, deleteCard } = this.props;
 
     return (
       <div>
@@ -21,6 +21,15 @@ class Card extends Component {
         <span data-testid="attr3-card">{ cardAttr3 }</span>
         <h4 data-testid="rare-card">{ cardRare }</h4>
         { (cardTrunfo) && <h2 data-testid="trunfo-card">Super Trunfo</h2> }
+        { (deleteBtn) && (
+          <button
+            onClick={ deleteCard }
+            data-testid="delete-button"
+            type="button"
+          >
+            Excluir
+          </button>
+        ) }
       </div>
     );
   }
@@ -31,10 +40,12 @@ Card.propTypes = {
   cardDescription: PropTypes.string.isRequired,
   cardImage: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  deleteBtn: PropTypes.bool.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardAttr3: PropTypes.number.isRequired,
   cardAttr2: PropTypes.number.isRequired,
   cardAttr1: PropTypes.number.isRequired,
+  deleteCard: PropTypes.func.isRequired,
 };
 
 export default Card;
