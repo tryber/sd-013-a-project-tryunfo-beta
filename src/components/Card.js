@@ -2,6 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Card extends Component {
+  constructor(props) {
+    super(props);
+    this.renderExcludeButton = this.renderExcludeButton.bind(this);
+  }
+
+  renderExcludeButton(onClick) {
+    return (
+      <button
+        data-testid="delete-button"
+        onClick={ onClick }
+        type="button"
+      >
+        Excluir
+      </button>
+    );
+  }
+
   render() {
     const {
       cardName,
@@ -12,6 +29,7 @@ class Card extends Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      onExcludeCard,
     } = this.props;
     return (
       <div>
@@ -23,6 +41,8 @@ class Card extends Component {
         <span data-testid="attr3-card">{cardAttr3}</span>
         <span data-testid="rare-card">{cardRare}</span>
         {cardTrunfo && <span data-testid="trunfo-card">Super Trunfo</span>}
+        {onExcludeCard !== undefined
+          && this.renderExcludeButton(onExcludeCard)}
       </div>
     );
   }

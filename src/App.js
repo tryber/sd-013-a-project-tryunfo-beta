@@ -5,6 +5,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentId: 0,
       cardName: '',
       cardDescription: '',
       cardAttr1: 0,
@@ -19,6 +20,7 @@ class App extends React.Component {
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.excludeButton = this.excludeButton.bind(this);
     this.setIsSaveButtonDisabled = this.setIsSaveButtonDisabled.bind(this);
   }
 
@@ -47,6 +49,7 @@ class App extends React.Component {
 
   onSaveButtonClick() {
     this.setState((prevState) => ({
+      currentId: prevState.currentId + 1,
       cardName: '',
       cardDescription: '',
       cardAttr1: 0,
@@ -54,11 +57,13 @@ class App extends React.Component {
       cardAttr3: 0,
       cardImage: '',
       cardRare: '',
+      cardTrunfo: false,
       hasTrunfo: prevState.cardTrunfo !== true
         ? prevState.cardList.some((item) => item.cardTrunfo === true)
         : true,
       cardList: [...prevState.cardList,
         {
+          id: prevState.currentId,
           cardName: prevState.cardName,
           cardDescription: prevState.cardDescription,
           cardAttr1: prevState.cardAttr1,
@@ -107,6 +112,17 @@ class App extends React.Component {
     }
   }
 
+  excludeButton(id) {
+    const { cardList } = this.state;
+    this.setState((prevState) => ({
+      cardList: cardList.filter((item) => item.id !== id),
+      hasTrunfo: prevState.cardTrunfo !== true
+        ? prevState.cardList.filter((item) => item.id !== id)
+          .some((item) => item.cardTrunfo === true)
+        : true,
+    }));
+  }
+
   render() {
     const {
       cardName,
@@ -149,9 +165,9 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
         />
         <section>
-          { cardList.map((item, index) => (
+          { cardList.map((item) => (
             <Card
-              key={ index }
+              key={ item.id }
               cardName={ item.cardName }
               cardDescription={ item.cardDescription }
               cardAttr1={ item.cardAttr1 }
@@ -160,6 +176,7 @@ class App extends React.Component {
               cardImage={ item.cardImage }
               cardRare={ item.cardRare }
               cardTrunfo={ item.cardTrunfo }
+              onExcludeCard={ () => this.excludeButton(item.id) }
             />
           ))}
         </section>
