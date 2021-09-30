@@ -9,7 +9,12 @@ class Card extends Component {
     return (
       <div>
         <h2 data-testid="name-card">{ cardName }</h2>
-        <img data-testid="image-card" src={ cardImage } alt="Nome da carta" />
+        <img
+          style={ { width: '150px' } }
+          data-testid="image-card"
+          src={ cardImage }
+          alt="Nome da carta"
+        />
         <p data-testid="description-card">{ cardDescription }</p>
         <span data-testid="attr1-card">{ cardAttr1 }</span>
         <span data-testid="attr2-card">{ cardAttr2 }</span>
