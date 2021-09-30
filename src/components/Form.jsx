@@ -1,5 +1,6 @@
 import React from 'react';
 import Atribut from './forms/Atribut';
+import Button from './forms/Button';
 import CardImage from './forms/CardImage';
 import CardName from './forms/CardName';
 import Description from './forms/Description';
@@ -12,78 +13,84 @@ class Form extends React.Component {
 
     this.state = {
       cardName: '',
-      description: '',
-      atribut1: '',
-      atribut2: '',
-      atribut3: '',
-      imagePath: '',
-      rarity: 'normal',
-      checked: false,
+      cardDescription: '',
+      cardAttr1: '',
+      cardAttr2: '',
+      cardAttr3: '',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      isSaveButtonDisabled: false,
+      // hasTrunfo: false,
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleForm = this.handleForm.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
   }
 
-  handleChange({ target: { value, name } }) {
+  handleClick() {
+    this.setState((prevState) => ({
+      cardTrunfo: !prevState.cardTrunfo,
+    }));
+  }
+
+  onInputChange({ target: { value, name } }) {
     this.setState({
       [name]: value,
     });
   }
 
-  handleClick() {
-    this.setState((prevState) => ({
-      checked: !prevState.checked,
-    }));
-  }
-
-  handleForm() {
+  onSaveButtonClick() {
     console.log('click');
   }
 
   render() {
     const {
-      cardName, description, atribut1, atribut2, atribut3, imagePath, rarity, checked,
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      isSaveButtonDisabled,
     } = this.state;
 
     return (
       <form>
         <h1>Adicionar nova carta</h1>
         <CardName
-          handleChange={ this.handleChange }
+          onInputChange={ this.onInputChange }
           cardName={ cardName }
         />
         <Description
-          handleChange={ this.handleChange }
-          description={ description }
+          onInputChange={ this.onInputChange }
+          cardDescription={ cardDescription }
         />
         <Atribut
-          handleChange={ this.handleChange }
-          atribut1={ atribut1 }
-          atribut={ atribut2 }
-          atribut3={ atribut3 }
+          onInputChange={ this.onInputChange }
+          cardAttr1={ cardAttr1 }
+          atribut={ cardAttr2 }
+          cardAttr3={ cardAttr3 }
         />
         <CardImage
-          handleChange={ this.handleChange }
-          imagePath={ imagePath }
+          onInputChange={ this.onInputChange }
+          cardImage={ cardImage }
         />
         <SelectRarity
-          handleChange={ this.handleChange }
-          rarity={ rarity }
+          onInputChange={ this.onInputChange }
+          cardRare={ cardRare }
         />
         <SuperTrunfo
-          checked={ checked }
+          cardTrunfo={ cardTrunfo }
           handleClick={ this.handleClick }
         />
-        <button
-          type="button"
-          onClick={ this.handleForm }
-          data-testid="save-button"
-          className="btn btn-outline-dark"
-        >
-          Salvar
-        </button>
+        <Button
+          isSaveButtonDisabled={ isSaveButtonDisabled }
+          onClick={ this.onSaveButtonClick }
+        />
       </form>
     );
   }

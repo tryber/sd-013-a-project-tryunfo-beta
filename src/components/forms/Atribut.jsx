@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 class Atribut extends React.Component {
   render() {
     const {
-      handleChange,
-      atribut1,
-      atribut2,
-      atribut3,
+      onInputChange,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
     } = this.props;
 
     return (
@@ -19,9 +19,9 @@ class Atribut extends React.Component {
               id="input-atribut-1"
               type="number"
               placeholder="primeiro atributo da carta"
-              value={ atribut1 }
-              name="atribut1"
-              onChange={ handleChange }
+              value={ cardAttr1 }
+              name="cardAttr1"
+              onChange={ onInputChange }
               data-testid="attr1-input"
               className="form-control"
             />
@@ -34,9 +34,9 @@ class Atribut extends React.Component {
               id="input-atribut-2"
               type="number"
               placeholder="segundo atributo da carta"
-              value={ atribut2 }
-              name="atribut2"
-              onChange={ handleChange }
+              value={ cardAttr2 }
+              name="cardAttr2"
+              onChange={ onInputChange }
               data-testid="attr2-input"
               className="form-control"
             />
@@ -49,9 +49,9 @@ class Atribut extends React.Component {
               id="input-atribut"
               type="number"
               placeholder="terceiro atributo da carta"
-              value={ atribut3 }
-              name="atribut3"
-              onChange={ handleChange }
+              value={ cardAttr3 }
+              name="cardAttr3"
+              onChange={ onInputChange }
               data-testid="attr3-input"
               className="form-control"
             />
@@ -63,10 +63,10 @@ class Atribut extends React.Component {
 }
 
 Atribut.propTypes = {
-  atribut1: PropTypes.string.isRequired,
-  atribut2: PropTypes.string.isRequired,
-  atribut3: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  cardAttr1: PropTypes.string.isRequired,
+  cardAttr2: PropTypes.string.isRequired,
+  cardAttr3: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
 };
 
 export default Atribut;

@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 
 class CardName extends React.Component {
   render() {
-    const { cardName, handleChange } = this.props;
+    const { cardName, onInputChange } = this.props;
 
     return (
       <div className="mb-3">
         <label className="form-label" htmlFor="input-card">
-          Nome
+          Nome da carta
           <input
             id="input-card"
             type="text"
             placeholder="Insira o nome da carta"
             value={ cardName }
             name="cardName"
-            onChange={ handleChange }
+            onChange={ onInputChange }
             data-testid="name-input"
             className="form-control"
           />
@@ -27,7 +27,7 @@ class CardName extends React.Component {
 
 CardName.propTypes = {
   cardName: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired,
 };
 
 export default CardName;

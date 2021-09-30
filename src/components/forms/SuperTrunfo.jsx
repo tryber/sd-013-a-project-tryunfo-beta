@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class SuperTrunfo extends React.Component {
   render() {
-    const { checked, handleClick } = this.props;
+    const { cardTrunfo, handleClick } = this.props;
 
     return (
       <div className="mb-3 form-check">
@@ -11,7 +11,7 @@ class SuperTrunfo extends React.Component {
           <input
             type="checkbox"
             id="input-super-trunfo"
-            checked={ checked }
+            checked={ cardTrunfo }
             onClick={ handleClick }
             data-testid="trunfo-input"
             className="form-check-input"
@@ -24,7 +24,7 @@ class SuperTrunfo extends React.Component {
 }
 
 SuperTrunfo.propTypes = {
-  checked: PropTypes.bool.isRequired,
+  cardTrunfo: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 

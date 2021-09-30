@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 
 class SelectRarity extends React.Component {
   render() {
-    const { rarity, handleChange } = this.props;
+    const { cardRare, onInputChange } = this.props;
 
     return (
       <div className="mb-3">
-        <label className="form-label" htmlFor="input-rarity">
+        <label className="form-label" htmlFor="input-cardRare">
           Raridade
           <select
-            name="rarity"
-            id="input-rarity"
-            value={ rarity }
-            onChange={ handleChange }
+            name="cardRare"
+            id="input-cardRare"
+            value={ cardRare }
+            onChange={ onInputChange }
             data-testid="rare-input"
             className="form-select"
           >
@@ -35,8 +35,8 @@ class SelectRarity extends React.Component {
 }
 
 SelectRarity.propTypes = {
-  rarity: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  cardRare: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
 };
 
 export default SelectRarity;
