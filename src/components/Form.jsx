@@ -25,7 +25,6 @@ class Form extends Component {
           value={ cardRare }
           onChange={ onInputChange }
         >
-          <option disabled value="">Selecione uma opção</option>
           <option value="normal">Normal</option>
           <option value="raro">Raro</option>
           <option value="muito raro">Muito Raro</option>

@@ -77,6 +77,11 @@ class App extends React.Component {
     ));
   }
 
+  removeCard = (id) => {
+    const { deck } = this.state;
+    this.setState({ deck: deck.filter((card) => card.id !== id) });
+  }
+
   render() {
     const { deck } = this.state;
     const hasTrunfo = deck.some(({ cardTrunfo }) => cardTrunfo);
@@ -91,9 +96,20 @@ class App extends React.Component {
           />
           <Card { ...this.state } />
         </div>
-        { deck.map((card) => (
-          <Card key={ card.id } { ...card } />
-        ))}
+        <div>
+          { deck.map((card) => (
+            <div key={ card.id }>
+              <Card { ...card } />
+              <button
+                type="button"
+                data-testid="delete-button"
+                onClick={ () => this.removeCard(card.id) }
+              >
+                Excluir
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
