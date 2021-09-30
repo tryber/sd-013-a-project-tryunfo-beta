@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Atribut from './forms/Atribut';
 import Button from './forms/Button';
 import CardImage from './forms/CardImage';
@@ -8,43 +9,6 @@ import SelectRarity from './forms/SelectRarity';
 import SuperTrunfo from './forms/SuperTrunfo';
 
 class Form extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      cardName: '',
-      cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
-      cardImage: '',
-      cardRare: 'normal',
-      cardTrunfo: false,
-      isSaveButtonDisabled: false,
-      // hasTrunfo: false,
-    };
-
-    this.onInputChange = this.onInputChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
-  }
-
-  handleClick() {
-    this.setState((prevState) => ({
-      cardTrunfo: !prevState.cardTrunfo,
-    }));
-  }
-
-  onInputChange({ target: { value, name } }) {
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  onSaveButtonClick() {
-    console.log('click');
-  }
-
   render() {
     const {
       cardName,
@@ -56,44 +20,60 @@ class Form extends React.Component {
       cardRare,
       cardTrunfo,
       isSaveButtonDisabled,
-    } = this.state;
+      onInputChange,
+      onSaveButtonClick,
+    } = this.props;
 
     return (
       <form>
         <h1>Adicionar nova carta</h1>
         <CardName
-          onInputChange={ this.onInputChange }
+          onInputChange={ onInputChange }
           cardName={ cardName }
         />
         <Description
-          onInputChange={ this.onInputChange }
+          onInputChange={ onInputChange }
           cardDescription={ cardDescription }
         />
         <Atribut
-          onInputChange={ this.onInputChange }
+          onInputChange={ onInputChange }
           cardAttr1={ cardAttr1 }
-          atribut={ cardAttr2 }
+          cardAttr2={ cardAttr2 }
           cardAttr3={ cardAttr3 }
         />
         <CardImage
-          onInputChange={ this.onInputChange }
+          onInputChange={ onInputChange }
           cardImage={ cardImage }
         />
         <SelectRarity
-          onInputChange={ this.onInputChange }
+          onInputChange={ onInputChange }
           cardRare={ cardRare }
         />
         <SuperTrunfo
           cardTrunfo={ cardTrunfo }
-          handleClick={ this.handleClick }
+          onInputChange={ onInputChange }
         />
         <Button
           isSaveButtonDisabled={ isSaveButtonDisabled }
-          onClick={ this.onSaveButtonClick }
+          onSaveButtonClick={ onSaveButtonClick }
         />
       </form>
     );
   }
 }
+
+Form.propTypes = {
+  cardName: PropTypes.string.isRequired,
+  cardDescription: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.string.isRequired,
+  cardAttr2: PropTypes.string.isRequired,
+  cardAttr3: PropTypes.string.isRequired,
+  cardImage: PropTypes.string.isRequired,
+  cardRare: PropTypes.string.isRequired,
+  cardTrunfo: PropTypes.bool.isRequired,
+  isSaveButtonDisabled: PropTypes.bool.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onSaveButtonClick: PropTypes.func.isRequired,
+};
 
 export default Form;
