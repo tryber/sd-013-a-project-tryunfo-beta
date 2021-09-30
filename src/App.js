@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Card } from './components';
+import { Form, Card, CardList } from './components';
 
 class App extends React.Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class App extends React.Component {
 
   render() {
     const { name, description, attr1, attr2, attr3, image, rare,
-      hasTrunfo, trunfo, isSaveButtonDisabled } = this.state;
+      hasTrunfo, trunfo, isSaveButtonDisabled, allCards } = this.state;
 
     return (
       <div>
@@ -92,6 +92,7 @@ class App extends React.Component {
           cardRare={ rare }
           cardTrunfo={ trunfo }
         />
+        <CardList allCards={ allCards } />
       </div>
     );
   }
