@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from './components';
+import { Form, Card } from './components';
 
 class App extends React.Component {
   constructor(props) {
@@ -50,6 +50,16 @@ class App extends React.Component {
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.handleChange }
           onSaveButtonClick={ this.onSaveButtonClick }
+        />
+        <Card
+          cardName={ name }
+          cardDescription={ description }
+          cardAttr1={ attr1 }
+          cardAttr2={ attr2 }
+          cardAttr3={ attr3 }
+          cardImage={ image }
+          cardRare={ rare }
+          cardTrunfo={ cardTrunfo }
         />
       </div>
     );

@@ -1,2 +1,2 @@
 export { default as Form } from './Form';
-export { default as Another } from './Another';
+export { default as Card } from './Card';
