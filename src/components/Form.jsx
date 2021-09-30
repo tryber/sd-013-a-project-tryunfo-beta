@@ -20,20 +20,21 @@ class Form extends Component {
         <p>Raridade</p>
         <select
           name="rarity"
-          id="rarity"
+          id="cardRare"
           data-testid="rare-input"
           value={ cardRare }
           onChange={ onInputChange }
         >
+          <option disabled value="">Selecione uma opção</option>
           <option value="normal">Normal</option>
           <option value="raro">Raro</option>
           <option value="muito raro">Muito Raro</option>
         </select>
 
-        <label htmlFor="trunfo-input">
+        <label htmlFor="cardTrunfo">
           <input
             type="checkbox"
-            id="trunfo-input"
+            id="cardTrunfo"
             data-testid="trunfo-input"
             checked={ cardTrunfo }
             onChange={ onInputChange }

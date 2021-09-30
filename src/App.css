@@ -1,3 +1,8 @@
+.form-and-preview {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .card-input-form {
   align-items: center;
   display: flex;
@@ -7,4 +12,11 @@
 
 .card-input-form p {
   margin: 0;
+}
+
+.card-preview {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

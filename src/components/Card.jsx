@@ -6,7 +6,7 @@ class Card extends Component {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
       cardRare, cardTrunfo } = this.props;
     return (
-      <div>
+      <div className="card-preview">
         <span className="card-name" data-testid="name-card">{cardName}</span>
         <img
           src={ cardImage }

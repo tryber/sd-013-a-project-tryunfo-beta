@@ -4,32 +4,38 @@ import PropTypes from 'prop-types';
 const properties = [
   {
     type: 'text',
-    id: 'name-input',
+    id: 'cardName',
+    testid: 'name-input',
     label: 'Nome',
   },
   {
     type: 'textarea',
-    id: 'description-input',
+    id: 'cardDescription',
+    testid: 'description-input',
     label: 'Descrição',
   },
   {
     type: 'number',
-    id: 'attr1-input',
+    id: 'cardAttr1',
+    testid: 'attr1-input',
     label: 'Attr01',
   },
   {
     type: 'number',
-    id: 'attr2-input',
+    id: 'cardAttr2',
+    testid: 'attr2-input',
     label: 'Attr02',
   },
   {
     type: 'number',
-    id: 'attr3-input',
+    id: 'cardAttr3',
+    testid: 'attr3-input',
     label: 'Attr03',
   },
   {
     type: 'text',
-    id: 'image-input',
+    id: 'cardImage',
+    testid: 'image-input',
     label: 'Imagem',
   },
 ];
@@ -46,7 +52,7 @@ class Input extends Component {
           <textarea
             type={ properties[idx].type }
             id={ properties[idx].id }
-            data-testid={ properties[idx].id }
+            data-testid={ properties[idx].testid }
             value={ value }
             onChange={ onChange }
           />
@@ -59,7 +65,7 @@ class Input extends Component {
           <input
             type={ properties[idx].type }
             id={ properties[idx].id }
-            data-testid={ properties[idx].id }
+            data-testid={ properties[idx].testid }
             value={ value }
             onChange={ onChange }
           />
