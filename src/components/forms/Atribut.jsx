@@ -18,6 +18,8 @@ class Atribut extends React.Component {
             <input
               id="input-atribut-1"
               type="number"
+              max="90"
+              min="0"
               placeholder="primeiro atributo da carta"
               value={ cardAttr1 }
               name="cardAttr1"
@@ -33,6 +35,8 @@ class Atribut extends React.Component {
             <input
               id="input-atribut-2"
               type="number"
+              max="90"
+              min="0"
               placeholder="segundo atributo da carta"
               value={ cardAttr2 }
               name="cardAttr2"
@@ -48,6 +52,8 @@ class Atribut extends React.Component {
             <input
               id="input-atribut"
               type="number"
+              max="90"
+              min="0"
               placeholder="terceiro atributo da carta"
               value={ cardAttr3 }
               name="cardAttr3"
