@@ -11,14 +11,14 @@ class Form extends Component {
     this.renderInputCheckBox = this.renderInputCheckBox.bind(this);
   }
 
-  renderInput({ title, testId, type, value, onChange }) {
+  renderInput({ title, testId, type, value, onChange, name }) {
     return (
-      <label htmlFor={ title }>
+      <label htmlFor={ name }>
         {title}
         <input
           value={ value }
           onChange={ onChange }
-          id={ title }
+          id={ name }
           type={ type }
           data-testid={ testId }
         />
@@ -26,34 +26,40 @@ class Form extends Component {
     );
   }
 
-  renderInputTextArea({ title, testId }) {
+  renderInputTextArea({ title, testId, value, onChange, name }) {
     return (
-      <label htmlFor={ title }>
+      <label htmlFor={ name }>
         {title}
-        <textarea id={ title } type="text" data-testid={ testId } />
+        <textarea
+          value={ value }
+          onChange={ onChange }
+          id={ name }
+          type="text"
+          data-testid={ testId }
+        />
       </label>
     );
   }
 
-  renderInputSelect({ title, testId, array }) {
+  renderInputSelect({ title, testId, array, name, onChange, value }) {
     return (
-      <label htmlFor={ title }>
+      <label htmlFor={ name }>
         {title}
-        <select id={ title } data-testid={ testId }>
+        <select value={ value } onChange={ onChange } id={ name } data-testid={ testId }>
           {array.map((e, i) => <option key={ i }>{e}</option>)}
         </select>
       </label>
     );
   }
 
-  renderInputCheckBox({ title, testId, value, onChange }) {
+  renderInputCheckBox({ title, testId, checked, onChange, name }) {
     return (
-      <label htmlFor={ title }>
+      <label htmlFor={ name }>
         {title}
         <input
-          checked={ value }
+          checked={ checked }
           onChange={ onChange }
-          id={ title }
+          id={ name }
           type="checkbox"
           data-testid={ testId }
         />
@@ -76,7 +82,7 @@ class Form extends Component {
 
   render() {
     const RARE = ['normal', 'raro', 'muito raro'];
-    const { data: {
+    const {
       cardName,
       cardDescription,
       cardAttr1,
@@ -89,7 +95,8 @@ class Form extends Component {
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
-    } } = this.props;
+    } = this.props;
+    // console.log(cardName);
     return (
       <div>
         {this.renderInput({
@@ -97,47 +104,55 @@ class Form extends Component {
           testId: 'name-input',
           type: 'text',
           value: cardName,
-          onChange: onInputChange })}
+          onChange: onInputChange,
+          name: 'cardName' })}
         {this.renderInputTextArea({
           title: 'Descrição',
           testId: 'description-input',
           value: cardDescription,
-          onChange: onInputChange })}
+          onChange: onInputChange,
+          name: 'cardDescription' })}
         {this.renderInput({
           title: 'Attr1',
           testId: 'attr1-input',
           type: 'number',
           value: cardAttr1,
-          onChange: onInputChange })}
+          onChange: onInputChange,
+          name: 'cardAttr1' })}
         {this.renderInput({
           title: 'Attr2',
           testId: 'attr2-input',
           type: 'number',
           value: cardAttr2,
-          onChange: onInputChange })}
+          onChange: onInputChange,
+          name: 'cardAttr2' })}
         {this.renderInput({
           title: 'Attr3',
           testId: 'attr3-input',
           type: 'number',
           value: cardAttr3,
-          onChange: onInputChange })}
+          onChange: onInputChange,
+          name: 'cardAttr3' })}
         {this.renderInput({
           title: 'Image',
           testId: 'image-input',
           type: 'text',
           value: cardImage,
-          onChange: onInputChange })}
+          onChange: onInputChange,
+          name: 'cardImage' })}
         {this.renderInputSelect({
           title: 'Raridade',
           testId: 'rare-input',
           array: RARE,
           value: cardRare,
-          onChange: onInputChange })}
+          onChange: onInputChange,
+          name: 'cardRare' })}
         {this.renderInputCheckBox({
           title: 'Super Trybe Trunfo',
           testId: 'trunfo-input',
           checked: cardTrunfo,
-          onChange: onInputChange })}
+          onChange: onInputChange,
+          name: 'cardTrunfo' })}
         {this.renderButton({
           title: 'Salvar',
           disabled: isSaveButtonDisabled,
@@ -148,7 +163,17 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-  data: PropTypes.shape({}),
+  cardName: PropTypes.string,
+  cardDescription: PropTypes.string,
+  cardAttr1: PropTypes.number,
+  cardAttr2: PropTypes.number,
+  cardAttr3: PropTypes.number,
+  cardImage: PropTypes.string,
+  cardRare: PropTypes.string,
+  cardTrunfo: PropTypes.bool,
+  isSaveButtonDisabled: PropTypes.bool,
+  onInputChange: PropTypes.func,
+  onSaveButtonClick: PropTypes.func,
 }.isRequired;
 
 export default Form;

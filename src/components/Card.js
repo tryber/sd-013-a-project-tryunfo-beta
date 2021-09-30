@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Card extends Component {
   render() {
-    const { data: {
+    const {
       cardName,
       cardDescription,
       cardAttr1,
@@ -12,11 +12,11 @@ class Card extends Component {
       cardImage,
       cardRare,
       cardTrunfo,
-    } } = this.props;
+    } = this.props;
     return (
       <div>
         <span data-testid="name-card">{cardName}</span>
-        <img src={ cardImage } alt="imgae" data-testid="image-card" />
+        <img src={ cardImage } alt={ cardName } data-testid="image-card" />
         <span data-testid="description-card">{cardDescription}</span>
         <span data-testid="attr1-card">{cardAttr1}</span>
         <span data-testid="attr2-card">{cardAttr2}</span>
@@ -29,7 +29,14 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  data: PropTypes.shape({}),
+  cardName: PropTypes.string,
+  cardDescription: PropTypes.string,
+  cardAttr1: PropTypes.number,
+  cardAttr2: PropTypes.number,
+  cardAttr3: PropTypes.number,
+  cardImage: PropTypes.string,
+  cardRare: PropTypes.string,
+  cardTrunfo: PropTypes.bool,
 }.isRequired;
 
 export default Card;
