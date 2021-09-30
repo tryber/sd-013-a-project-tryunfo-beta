@@ -5,6 +5,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Tryunfo</h1>
+        <p>sendo executado por Caê Calçolari</p>
       </div>
     );
   }
