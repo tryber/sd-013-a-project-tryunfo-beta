@@ -98,66 +98,68 @@ class Form extends Component {
     } = this.props;
     // console.log(cardName);
     return (
-      <div>
-        {this.renderInput({
-          title: 'Nome',
-          testId: 'name-input',
-          type: 'text',
-          value: cardName,
-          onChange: onInputChange,
-          name: 'cardName' })}
-        {this.renderInputTextArea({
-          title: 'Descrição',
-          testId: 'description-input',
-          value: cardDescription,
-          onChange: onInputChange,
-          name: 'cardDescription' })}
-        {this.renderInput({
-          title: 'Attr1',
-          testId: 'attr1-input',
-          type: 'number',
-          value: cardAttr1,
-          onChange: onInputChange,
-          name: 'cardAttr1' })}
-        {this.renderInput({
-          title: 'Attr2',
-          testId: 'attr2-input',
-          type: 'number',
-          value: cardAttr2,
-          onChange: onInputChange,
-          name: 'cardAttr2' })}
-        {this.renderInput({
-          title: 'Attr3',
-          testId: 'attr3-input',
-          type: 'number',
-          value: cardAttr3,
-          onChange: onInputChange,
-          name: 'cardAttr3' })}
-        {this.renderInput({
-          title: 'Image',
-          testId: 'image-input',
-          type: 'text',
-          value: cardImage,
-          onChange: onInputChange,
-          name: 'cardImage' })}
-        {this.renderInputSelect({
-          title: 'Raridade',
-          testId: 'rare-input',
-          array: RARE,
-          value: cardRare,
-          onChange: onInputChange,
-          name: 'cardRare' })}
-        {this.renderInputCheckBox({
-          title: 'Super Trybe Trunfo',
-          testId: 'trunfo-input',
-          checked: cardTrunfo,
-          onChange: onInputChange,
-          name: 'cardTrunfo' })}
-        {this.renderButton({
-          title: 'Salvar',
-          disabled: isSaveButtonDisabled,
-          onClick: onSaveButtonClick })}
-      </div>
+      <form>
+        <fieldset>
+          {this.renderInput({
+            title: 'Nome',
+            testId: 'name-input',
+            type: 'text',
+            value: cardName,
+            onChange: onInputChange,
+            name: 'cardName' })}
+          {this.renderInputTextArea({
+            title: 'Descrição',
+            testId: 'description-input',
+            value: cardDescription,
+            onChange: onInputChange,
+            name: 'cardDescription' })}
+          {this.renderInput({
+            title: 'Attr1',
+            testId: 'attr1-input',
+            type: 'number',
+            value: cardAttr1,
+            onChange: onInputChange,
+            name: 'cardAttr1' })}
+          {this.renderInput({
+            title: 'Attr2',
+            testId: 'attr2-input',
+            type: 'number',
+            value: cardAttr2,
+            onChange: onInputChange,
+            name: 'cardAttr2' })}
+          {this.renderInput({
+            title: 'Attr3',
+            testId: 'attr3-input',
+            type: 'number',
+            value: cardAttr3,
+            onChange: onInputChange,
+            name: 'cardAttr3' })}
+          {this.renderInput({
+            title: 'Image',
+            testId: 'image-input',
+            type: 'text',
+            value: cardImage,
+            onChange: onInputChange,
+            name: 'cardImage' })}
+          {this.renderInputSelect({
+            title: 'Raridade',
+            testId: 'rare-input',
+            array: RARE,
+            value: cardRare,
+            onChange: onInputChange,
+            name: 'cardRare' })}
+          {this.renderInputCheckBox({
+            title: 'Super Trybe Trunfo',
+            testId: 'trunfo-input',
+            checked: cardTrunfo,
+            onChange: onInputChange,
+            name: 'cardTrunfo' })}
+          {this.renderButton({
+            title: 'Salvar',
+            disabled: isSaveButtonDisabled,
+            onClick: onSaveButtonClick })}
+        </fieldset>
+      </form>
     );
   }
 }
