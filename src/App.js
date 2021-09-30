@@ -3,7 +3,7 @@ import { Form } from './components';
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       name: '',
       description: '',
@@ -27,9 +27,9 @@ class App extends React.Component {
   }
 
   onSaveButtonClick() {
-
+    console.log('oi');
   }
-  
+
   render() {
     const { name, description, attr1, attr2, attr3, image, rare,
       hasTrunfo, cardTrunfo, isSaveButtonDisabled } = this.state;
