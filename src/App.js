@@ -1,6 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Card, Form } from './components';
+import { Card, Filters, Form } from './components';
 import './App.css';
 
 class App extends React.Component {
@@ -18,6 +18,9 @@ class App extends React.Component {
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       deck: [],
+      filters: {
+        filterByName: '',
+      },
     };
   }
 
@@ -82,9 +85,24 @@ class App extends React.Component {
     this.setState({ deck: deck.filter((card) => card.id !== id) });
   }
 
+  onFilterChange = ({ target: { id, value } }) => {
+    this.setState((state) => ({ filters: { ...state.filters, [id]: value } }));
+  }
+
+  filterDeck = () => {
+    const { deck, filters: { filterByName } } = this.state;
+
+    const filteredDeck = deck.filter(({ cardName }) => (
+      (cardName.toLowerCase()).includes(filterByName.toLowerCase())
+    ));
+
+    return filteredDeck;
+  }
+
   render() {
     const { deck } = this.state;
     const hasTrunfo = deck.some(({ cardTrunfo }) => cardTrunfo);
+    const filteredDeck = this.filterDeck();
     return (
       <div>
         <div className="form-and-preview">
@@ -96,19 +114,22 @@ class App extends React.Component {
           />
           <Card { ...this.state } />
         </div>
-        <div>
-          { deck.map((card) => (
-            <div key={ card.id }>
-              <Card { ...card } />
-              <button
-                type="button"
-                data-testid="delete-button"
-                onClick={ () => this.removeCard(card.id) }
-              >
-                Excluir
-              </button>
-            </div>
-          ))}
+        <div className="filters-and-deck">
+          <Filters onFilterChange={ this.onFilterChange } />
+          <div className="deck">
+            { filteredDeck.map((card) => (
+              <div key={ card.id }>
+                <Card { ...card } />
+                <button
+                  type="button"
+                  data-testid="delete-button"
+                  onClick={ () => this.removeCard(card.id) }
+                >
+                  Excluir
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
