@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 export class Input extends Component {
   render() {
     const { type, name, testid, value, onChange } = this.props;
-
     if (type === 'textarea') {
       return (
         <label htmlFor={ name }>

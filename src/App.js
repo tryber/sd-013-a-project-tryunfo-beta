@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from './components';
+import { Card, Form } from './components';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,12 +27,18 @@ class App extends React.Component {
 
   onSaveButtonClick(event) {
     event.preventDefault();
+    console.log('salvou');
   }
 
   render() {
     return (
       <div>
-        <Form { ...this.state } onInputChange={ this.onInputChange } />
+        <Form
+          { ...this.state }
+          onInputChange={ this.onInputChange }
+          onSaveButtonClick={ this.onSaveButtonClick }
+        />
+        <Card { ...this.state } />
       </div>
     );
   }
