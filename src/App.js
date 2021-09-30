@@ -1,21 +1,22 @@
 import React from 'react';
-import { Form, Card, CardList } from './components';
+import { Form, Card, CardList, FiltersInputs } from './components';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      description: '',
+      allCards: [],
       attr1: 0,
       attr2: 0,
       attr3: 0,
+      description: '',
       image: '',
+      name: '',
       rare: 'normal',
       isSaveButtonDisabled: true,
       hasTrunfo: false,
       trunfo: false,
-      allCards: [],
+      nameFilter: '',
     };
     this.verifyButtonDisabled = this.verifyButtonDisabled.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -70,12 +71,15 @@ class App extends React.Component {
   }
 
   render() {
-    const { name, description, attr1, attr2, attr3, image, rare,
+    const { name, description, attr1, attr2, attr3, image, rare, nameFilter,
       hasTrunfo, trunfo, isSaveButtonDisabled, allCards } = this.state;
 
     return (
       <div>
-        Lets Go!!
+        <FiltersInputs
+          nameFilter={ nameFilter }
+          handleChange={ this.handleChange }
+        />
         <Form
           cardName={ name }
           cardDescription={ description }
@@ -100,7 +104,11 @@ class App extends React.Component {
           cardRare={ rare }
           cardTrunfo={ trunfo }
         />
-        <CardList deleteCard={ this.deleteCard } allCards={ allCards } />
+        <CardList
+          nameFilter={ nameFilter }
+          deleteCard={ this.deleteCard }
+          allCards={ allCards }
+        />
       </div>
     );
   }

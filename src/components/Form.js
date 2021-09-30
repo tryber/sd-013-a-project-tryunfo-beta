@@ -39,7 +39,7 @@ export default class Form extends React.Component {
             type="number"
           />
         </label>
-        <label htmlFor="attr2-input">
+        <label htmlFor="attr2">
           Attribute 2:
           <input
             onChange={ onInputChange }
@@ -59,7 +59,7 @@ export default class Form extends React.Component {
             type="number"
           />
         </label>
-        <label htmlFor="image-input">
+        <label htmlFor="image">
           Image:
           <input
             onChange={ onInputChange }

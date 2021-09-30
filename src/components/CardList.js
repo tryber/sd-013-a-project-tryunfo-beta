@@ -4,26 +4,28 @@ import Card from './Card';
 
 class CardList extends Component {
   render() {
-    const { allCards, deleteCard } = this.props;
+    const { allCards, deleteCard, nameFilter } = this.props;
     return (
       <div>
-        { (allCards && allCards.length !== 0) && allCards.map(
-          ({ name, description, attr1, attr2, attr3, image, rare, trunfo }, index) => (
-            <Card
-              key={ `${index}-${name}` }
-              deleteBtn
-              deleteCard={ () => deleteCard(index) }
-              cardName={ name }
-              cardDescription={ description }
-              cardAttr1={ attr1 }
-              cardAttr2={ attr2 }
-              cardAttr3={ attr3 }
-              cardImage={ image }
-              cardRare={ rare }
-              cardTrunfo={ trunfo }
-            />
-          ),
-        ) }
+        { (allCards && allCards.length !== 0) && allCards
+          .filter(({ name }) => name.includes(nameFilter))
+          .map(
+            ({ name, description, attr1, attr2, attr3, image, rare, trunfo }, index) => (
+              <Card
+                key={ `${index}-${name}` }
+                deleteBtn
+                deleteCard={ () => deleteCard(index) }
+                cardName={ name }
+                cardDescription={ description }
+                cardAttr1={ attr1 }
+                cardAttr2={ attr2 }
+                cardAttr3={ attr3 }
+                cardImage={ image }
+                cardRare={ rare }
+                cardTrunfo={ trunfo }
+              />
+            ),
+          ) }
       </div>
     );
   }
@@ -32,6 +34,7 @@ class CardList extends Component {
 CardList.propTypes = {
   allCards: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteCard: PropTypes.func.isRequired,
+  nameFilter: PropTypes.string.isRequired,
 };
 
 export default CardList;
