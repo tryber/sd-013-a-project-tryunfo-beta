@@ -15,6 +15,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       hasTrunfo: false,
       cardTrunfo: true,
+      allCards: [],
     };
     this.verifyButtonDisabled = this.verifyButtonDisabled.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,7 +28,19 @@ class App extends React.Component {
   }
 
   onSaveButtonClick() {
-    // console.log('oi');
+    const { name, description, image, rare, attr3, attr2, attr1 } = this.state;
+    const obj = { name, description, image, rare, attr3, attr2, attr1 };
+    this.setState(({ allCards }) => ({ allCards: [...allCards, obj] }), () => {
+      this.setState(() => ({
+        name: '',
+        description: '',
+        image: '',
+        rare: 'normal',
+        attr1: 0,
+        attr2: 0,
+        attr3: 0,
+      }));
+    });
   }
 
   verifyButtonDisabled() {
