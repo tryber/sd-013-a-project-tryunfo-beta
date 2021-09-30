@@ -10,12 +10,13 @@ class App extends React.Component {
       cardName: '',
       cardImage: '',
       cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
-      cardRare: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
+      cardDeck: [],
     };
   }
 
@@ -57,13 +58,34 @@ class App extends React.Component {
     }
   }
 
+  onSaveButtonClick = () => {
+    const { isSaveButtonDisabled, cardDeck, ...newCard } = this.state;
+    this.setState((state) => (
+      {
+        cardDeck: [...state.cardDeck, newCard],
+        cardName: '',
+        cardImage: '',
+        cardDescription: '',
+        cardAttr1: '0',
+        cardAttr2: '0',
+        cardAttr3: '0',
+        cardRare: 'normal',
+        cardTrunfo: false,
+      }
+    ));
+  }
+
   render() {
     // const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
     //   cardRare, cardTrunfo } = this.state;
     return (
       <div>
         <div className="form-and-preview">
-          <Form { ...this.state } onInputChange={ this.onInputChange } />
+          <Form
+            { ...this.state }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+          />
           <Card { ...this.state } />
         </div>
       </div>
