@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { Card, Form } from './components';
 import './App.css';
 
@@ -60,6 +61,7 @@ class App extends React.Component {
 
   onSaveButtonClick = () => {
     const { isSaveButtonDisabled, deck, ...newCard } = this.state;
+    newCard.id = uuidv4();
     this.setState((state) => (
       {
         deck: [...state.deck, newCard],
@@ -89,6 +91,9 @@ class App extends React.Component {
           />
           <Card { ...this.state } />
         </div>
+        { deck.map((card) => (
+          <Card key={ card.id } { ...card } />
+        ))}
       </div>
     );
   }
