@@ -16,8 +16,8 @@ class Card extends React.Component {
 
     return (
       <div>
-        <header>
-          <h4 data-testid="name-card">
+        <header className="card-header">
+          <h4 className="card-name" data-testid="name-card">
             { cardName }
           </h4>
         </header>
@@ -26,25 +26,29 @@ class Card extends React.Component {
             src={ cardImage }
             alt={ cardName }
             data-testid="image-card"
+            className="card-image"
           />
-          <p data-testid="description-card">
+          <p className="card-description" data-testid="description-card">
             { cardDescription }
           </p>
         </section>
-        <aside>
+        <section className="atrr-conteiner">
           <span data-testid="attr1-card">
+            <span className="atrr-span">attr 1</span>
             { cardAttr1 }
           </span>
           <span data-testid="attr2-card">
+            <span className="atrr-span">attr 2</span>
             { cardAttr2 }
           </span>
           <span data-testid="attr3-card">
+            <span className="atrr-span">attr 3</span>
             { cardAttr3 }
           </span>
-        </aside>
-        <footer>
-          <p data-testid="rare-card">{ cardRare }</p>
-          {cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : null}
+        </section>
+        <footer className="card-footer">
+          <p id="p-rare-footer" data-testid="rare-card">{ cardRare }</p>
+          {cardTrunfo && <p id="p-footer" data-testid="trunfo-card">Super Trunfo</p>}
         </footer>
       </div>
     );

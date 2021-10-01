@@ -10,7 +10,7 @@ class Button extends React.Component {
         type="button"
         onClick={ onSaveButtonClick }
         data-testid="save-button"
-        className="btn btn-outline-dark"
+        className="btn-hand btn"
         disabled={ isSaveButtonDisabled }
       >
         Salvar

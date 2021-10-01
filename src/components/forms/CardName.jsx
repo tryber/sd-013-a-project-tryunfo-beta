@@ -8,11 +8,11 @@ class CardName extends React.Component {
     return (
       <div className="mb-3">
         <label className="form-label" htmlFor="input-card">
-          Nome da carta
           <input
             id="input-card"
             type="text"
             placeholder="Insira o nome da carta"
+            maxLength="20"
             value={ cardName }
             name="cardName"
             onChange={ onInputChange }

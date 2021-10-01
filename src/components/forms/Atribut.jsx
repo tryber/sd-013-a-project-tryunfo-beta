@@ -13,7 +13,7 @@ class Atribut extends React.Component {
     return (
       <>
         <div className="mb-3">
-          <label className="form-label" htmlFor="input-atribut-1">
+          <label id="atr-label" className="form-label" htmlFor="input-atribut-1">
             Attr1
             <input
               id="input-atribut-1"
@@ -30,7 +30,7 @@ class Atribut extends React.Component {
           </label>
         </div>
         <div className="mb-3">
-          <label className="form-label" htmlFor="input-atribut-2">
+          <label id="atr-label" className="form-label" htmlFor="input-atribut-2">
             Attr2
             <input
               id="input-atribut-2"
@@ -47,7 +47,7 @@ class Atribut extends React.Component {
           </label>
         </div>
         <div className="mb-3">
-          <label className="form-label" htmlFor="input-atribut-3">
+          <label id="atr-label" className="form-label" htmlFor="input-atribut-3">
             Attr3
             <input
               id="input-atribut"

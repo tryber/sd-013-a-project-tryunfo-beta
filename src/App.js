@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
 import AllCards from './components/AllCards';
+import './App.css';
 
 class App extends React.Component {
   constructor() {
@@ -109,7 +110,7 @@ class App extends React.Component {
     });
 
     if (cardTrunfo) {
-      this.setState({ hasTrunfo: true });
+      this.setState({ hasTrunfo: true, cardTrunfo: false });
     }
   }
 
@@ -130,37 +131,48 @@ class App extends React.Component {
 
     return (
       <div>
-        <h1>Tryunfo</h1>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          hasTrunfo={ hasTrunfo }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          hasTrunfo={ hasTrunfo }
-        />
-        <AllCards
-          gameCards={ gameCards }
-          handleDelete={ this.handleDelete }
-        />
+        <header className="header-container">
+          <img src="https://st2.depositphotos.com/4497765/7554/v/950/depositphotos_75545899-stock-illustration-super-comic-book-style-word.jpg" alt="Logo Super" />
+          <h1>Tryunfo</h1>
+        </header>
+        <div className="create-card-conteiner">
+          <div>
+            <Form
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              isSaveButtonDisabled={ isSaveButtonDisabled }
+              hasTrunfo={ hasTrunfo }
+              onInputChange={ this.onInputChange }
+              onSaveButtonClick={ this.onSaveButtonClick }
+            />
+          </div>
+          <div className="preview-container">
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              isSaveButtonDisabled={ isSaveButtonDisabled }
+              hasTrunfo={ hasTrunfo }
+            />
+          </div>
+        </div>
+        <div>
+          <AllCards
+            gameCards={ gameCards }
+            handleDelete={ this.handleDelete }
+          />
+        </div>
       </div>
     );
   }

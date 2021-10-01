@@ -27,7 +27,7 @@ class Form extends React.Component {
 
     return (
       <form>
-        <h1>Adicionar nova carta</h1>
+        <h3>Adicionar nova carta</h3>
         <CardName
           onInputChange={ onInputChange }
           cardName={ cardName }
@@ -46,16 +46,20 @@ class Form extends React.Component {
           onInputChange={ onInputChange }
           cardImage={ cardImage }
         />
-        <SelectRarity
-          onInputChange={ onInputChange }
-          cardRare={ cardRare }
-        />
-        {hasTrunfo ? (<p>Você já tem um Super Trunfo em seu baralho</p>
-        ) : (
-          <SuperTrunfo
-            cardTrunfo={ cardTrunfo }
+        <div className="rarity-trunfo">
+          <SelectRarity
             onInputChange={ onInputChange }
-          />)}
+            cardRare={ cardRare }
+          />
+          <div className="trunfo-conteiner">
+            {hasTrunfo ? (<p>Você já tem um Super Trunfo em seu baralho</p>
+            ) : (
+              <SuperTrunfo
+                cardTrunfo={ cardTrunfo }
+                onInputChange={ onInputChange }
+              />)}
+          </div>
+        </div>
         <Button
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onSaveButtonClick={ onSaveButtonClick }

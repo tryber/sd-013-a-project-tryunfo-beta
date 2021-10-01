@@ -7,13 +7,13 @@ class Description extends React.Component {
     return (
       <div className="mb-3">
         <label className="form-label" htmlFor="input-cardDescription">
-          Descrição da carta
           <textarea
             name="cardDescription"
             id="input-cardDescription"
             cols="30"
             rows="5"
             placeholder="Insira uma descrição para a carta"
+            maxLength="100"
             value={ cardDescription }
             onChange={ onInputChange }
             data-testid="description-input"
