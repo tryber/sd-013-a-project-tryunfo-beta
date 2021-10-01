@@ -2,15 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
-  }
-
-  onSaveButtonClick() {
-    console.log('n.a');
-  }
-
   render() {
     const {
       cardName,
@@ -21,7 +12,7 @@ class Form extends Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      hasTrunfo,
+      // hasTrunfo,
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
@@ -30,41 +21,48 @@ class Form extends Component {
       <>
         <input
           value={ cardName }
+          id="cardName"
           onChange={ onInputChange }
           type="text"
           data-testid="name-input"
         />
         <input
+          id="cardDescription"
           value={ cardDescription }
           onChange={ onInputChange }
           type="textarea"
           data-testid="description-input"
         />
         <input
+          id="cardAttr1"
           value={ cardAttr1 }
           onChange={ onInputChange }
           type="number"
           data-testid="attr1-input"
         />
         <input
+          id="cardAttr2"
           value={ cardAttr2 }
           onChange={ onInputChange }
           type="number"
           data-testid="attr2-input"
         />
         <input
+          id="cardAttr3"
           value={ cardAttr3 }
           onChange={ onInputChange }
           type="number"
           data-testid="attr3-input"
         />
         <input
+          id="cardImage"
           value={ cardImage }
           onChange={ onInputChange }
           type="text"
           data-testid="image-input"
         />
         <select
+          id="cardRare"
           value={ cardRare }
           onChange={ onInputChange }
           type="select"
@@ -75,14 +73,16 @@ class Form extends Component {
           <option value="muito raro">Muito Raro</option>
         </select>
         <input
+          id="cardTrunfo"
           checked={ cardTrunfo }
           onChange={ onInputChange }
           type="checkbox"
           data-testid="trunfo-input"
         />
         <button
+          id="save-button"
           disabled={ isSaveButtonDisabled }
-          onClick={ () => onSaveButtonClick() }
+          onClick={ onSaveButtonClick }
           data-testid="save-button"
           type="button"
         >
@@ -102,7 +102,7 @@ Form.propTypes = {
   cardImage: PropTypes.string,
   cardRare: PropTypes.string,
   cardTrunfo: PropTypes.bool,
-  hasTrunfo: PropTypes.bool,
+  // hasTrunfo: PropTypes.bool,
   isSaveButtonDisabled: PropTypes.bool,
   onInputChange: PropTypes.func,
   onSaveButtonClick: PropTypes.func,
