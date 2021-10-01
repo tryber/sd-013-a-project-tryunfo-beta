@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
+import AllCards from './components/AllCards';
 
 class App extends React.Component {
   constructor() {
@@ -75,10 +76,6 @@ class App extends React.Component {
     };
     gameCards.push(card);
 
-    if (cardTrunfo) {
-      this.setState({ hasTrunfo: true });
-    }
-
     this.setState({
       cardName: '',
       cardDescription: '',
@@ -88,6 +85,10 @@ class App extends React.Component {
       cardImage: '',
       cardRare: 'normal',
     });
+
+    if (cardTrunfo) {
+      this.setState({ hasTrunfo: true });
+    }
   }
 
   render() {
@@ -102,6 +103,7 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       hasTrunfo,
+      gameCards,
     } = this.state;
 
     return (
@@ -132,8 +134,9 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           hasTrunfo={ hasTrunfo }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
+        />
+        <AllCards
+          gameCards={ gameCards }
         />
       </div>
     );
