@@ -18,6 +18,8 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
     };
     this.onInputChange = this.onInputChange.bind(this);
+    this.verifyButton = this.verifyButton.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
   }
 
   onInputChange({ target: { id, value, type } }) {
@@ -32,6 +34,7 @@ class App extends React.Component {
         [id]: !prevState[id],
       }));
     }
+    this.verifyButton();
   }
 
   onSaveButtonClick() {
@@ -40,6 +43,32 @@ class App extends React.Component {
     //   isSaveButtonDisabled: true,
     // }));
     console.log('N.A');
+  }
+
+  // base para criar a função https://pt.stackoverflow.com/questions/6819/como-habilitar-um-bot%C3%A3o-apenas-quando-todos-os-inputs-estiverem-preenchidos
+  verifyButton() {
+    let controle = true;
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+    } = this.state;
+
+    if (Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) > Number('210')) {
+      controle = false;
+    }
+    if (Number(cardAttr1) > Number('90') || Number(cardAttr1) <= 0) controle = false;
+    if (Number(cardAttr2) > Number('90') || Number(cardAttr2) <= 0) controle = false;
+    if (Number(cardAttr3) > Number('90') || Number(cardAttr3) <= 0) controle = false;
+    if (cardName && cardDescription && cardImage && cardRare && controle) {
+      this.setState({ isSaveButtonDisabled: false });
+    } else {
+      this.setState({ isSaveButtonDisabled: true });
+    }
   }
 
   render() {
