@@ -22,11 +22,23 @@ describe("5 - Faça a validação do botão de Salvar no formulário", () => {
     expect(saveBtn).toBeDisabled();
   });
 
-  it("Será validado se o botão  `salvar` está desabilitado se o campo imagem estiver vazio", () => {
+  it("Será validado se o botão  `salvar` está desabilitado se o campo descrição estiver vazio", () => {
     render(<App />);
     const saveBtn = screen.getByTestId("save-button");
     userEvent.type(screen.getByTestId(/name-input/i), 'Lorem ipsum');
     userEvent.type(screen.getByTestId(/image-input/i), 'url-to-image');
+    userEvent.type(screen.getByTestId(/attr1-input/i), '12');
+    userEvent.type(screen.getByTestId(/attr2-input/i), '34');
+    userEvent.type(screen.getByTestId(/attr3-input/i), '56');
+    userEvent.selectOptions(screen.getByTestId(/rare-input/i), 'raro');
+    expect(saveBtn).toBeDisabled();
+  });
+
+  it("Será validado se o botão  `salvar` está desabilitado se o campo image estiver vazio", () => {
+    render(<App />);
+    const saveBtn = screen.getByTestId("save-button");
+    userEvent.type(screen.getByTestId(/name-input/i), 'Roy Musthang');
+    userEvent.type(screen.getByTestId(/description-input/i), 'Lorem ipsum');
     userEvent.type(screen.getByTestId(/attr1-input/i), '12');
     userEvent.type(screen.getByTestId(/attr2-input/i), '34');
     userEvent.type(screen.getByTestId(/attr3-input/i), '56');
