@@ -13,6 +13,7 @@ class App extends React.Component {
       cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
+      yugioh: [],
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
@@ -38,11 +39,24 @@ class App extends React.Component {
   }
 
   onSaveButtonClick() {
-    // this.setState((prevState) => ({
-    //   ...prevState,
-    //   isSaveButtonDisabled: true,
-    // }));
-    console.log('N.A');
+    const {
+      isSaveButtonDisabled,
+      yugioh,
+      ...newCard
+    } = this.state;
+    this.setState((state) => (
+      {
+        yugioh: [...state.yugioh, newCard],
+        cardName: '',
+        cardImage: '',
+        cardDescription: '',
+        cardAttr1: '0',
+        cardAttr2: '0',
+        cardAttr3: '0',
+        cardRare: 'normal',
+        cardTrunfo: false,
+      }
+    ));
   }
 
   // base para criar a função https://pt.stackoverflow.com/questions/6819/como-habilitar-um-bot%C3%A3o-apenas-quando-todos-os-inputs-estiverem-preenchidos
