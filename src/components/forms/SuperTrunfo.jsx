@@ -13,7 +13,7 @@ class SuperTrunfo extends React.Component {
             id="input-super-trunfo"
             checked={ cardTrunfo }
             name="trunfo"
-            onClick={ onInputChange }
+            onChange={ onInputChange }
             data-testid="trunfo-input"
             className="form-check-input"
           />

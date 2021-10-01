@@ -17,7 +17,7 @@ class SelectRarity extends React.Component {
             data-testid="rare-input"
             className="form-select"
           >
-            <option selected value="normal">
+            <option value="normal">
               normal
             </option>
             <option value="raro">

@@ -23,31 +23,53 @@ class App extends React.Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete({ target: { value } }) {
+    const { gameCards } = this.state;
+
+    const cardToDelet = gameCards.filter((card) => card.cardName === value);
+    if (cardToDelet[0].cardTrunfo) {
+      this.setState({ cardTrunfo: false, hasTrunfo: false });
+    }
+    const updateGameCards = gameCards.filter((card) => card.cardName !== value);
+    this.setState({
+      gameCards: updateGameCards,
+    });
   }
 
   onInputChange({ target: { value, name } }) {
-    const magicNumber = 210;
-    const magicNumber2 = 90;
-    const {
-      cardRare, cardName, cardDescription, cardImage, cardAttr1, cardAttr2, cardAttr3,
-    } = this.state;
-
     if (name === 'trunfo') {
       this.setState((prevState) => ({ cardTrunfo: !prevState.cardTrunfo }));
     }
+
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+    } = this.state;
+    const magicNumber = 210;
+    const magicNumber2 = 90;
+
     this.setState({
       [name]: value,
     });
+
     if ((cardName.length > 1)
-      && (cardRare.length > 1)
-      && (cardDescription.length > 1)
-      && (cardImage.length > 1)
-      && (Number(cardAttr1) < magicNumber2)
-      && (Number(cardAttr2) < magicNumber2)
-      && (Number(cardAttr3) < magicNumber2)
-      && (Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) < magicNumber)) {
-      return this.setState((prev) => ({
-        isSaveButtonDisabled: !prev.isSaveButtonDisabled,
+    && (cardRare.length > 1)
+    && (cardDescription.length > 1)
+    && (cardImage.length > 1)
+    && (Number(cardAttr1) < magicNumber2)
+    && (Number(cardAttr2) < magicNumber2)
+    && (Number(cardAttr3) < magicNumber2)
+    && (Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) < magicNumber)) {
+      return this.setState(({
+        isSaveButtonDisabled: false,
       }));
     }
   }
@@ -137,6 +159,7 @@ class App extends React.Component {
         />
         <AllCards
           gameCards={ gameCards }
+          handleDelete={ this.handleDelete }
         />
       </div>
     );
