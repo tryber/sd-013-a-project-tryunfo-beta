@@ -75,6 +75,10 @@ class App extends React.Component {
     };
     gameCards.push(card);
 
+    if (cardTrunfo) {
+      this.setState({ hasTrunfo: true });
+    }
+
     this.setState({
       cardName: '',
       cardDescription: '',
