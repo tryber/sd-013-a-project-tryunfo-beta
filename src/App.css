@@ -5,7 +5,7 @@
 
 .header-container {
   display: flex;
-  font-family: Italianno;
+  font-family: Italianno, sans-serif;
   justify-content: center;
   margin-bottom: 100px;
   min-height: 100vh;
@@ -24,16 +24,16 @@
   color: green;
   font-size: 150px;
   margin-top: 280px;
-  text-shadow: 4px 4px 5px green;  
+  text-shadow: 4px 4px 5px green;
   transform: rotate(-25deg);
 }
 
 @keyframes entrance {
-  0% {margin-left: 0;}
-  25% {margin-left: 90%;}
-  50% {margin-left: 0;}
-  90% {margin-left: -90%;}
-  100% {margin-left: 0;}
+  0% { margin-left: 0; }
+  25% { margin-left: 90%; }
+  50% { margin-left: 0; }
+  90% { margin-left: -90%; }
+  100% { margin-left: 0; }
 }
 
 h3 {
@@ -47,11 +47,7 @@ input, textarea, select {
   box-shadow: 2px 2px 3px grey;
 }
 
-#input-card {
-  min-width: 340px;
-}
-
-#imput-card-image {
+#input-card, #imput-card-image {
   min-width: 340px;
 }
 
@@ -152,7 +148,7 @@ input, textarea, select {
   background-position: 150% 50%;
   background-size: 150px;
   border-radius: 35%;
-  font-family: Italianno;
+  font-family: Italianno, sans-serif;
   font-size: 45px;
   font-weight: 600;
   margin-top: 10px;
