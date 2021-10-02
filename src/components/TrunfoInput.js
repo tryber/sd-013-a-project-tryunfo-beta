@@ -1,14 +1,18 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 export class TrunfoInput extends Component {
   render() {
+    const { state: { cardTrunfo, onInputChange } } = this.props;
     return (
       <label htmlFor="trunfo-input">
         <input
           data-testid="trunfo-input"
           type="checkbox"
-          name="trunfo-input"
+          name="cardTrunfo"
           id="trunfo-input"
+          checked={ cardTrunfo }
+          onChange={ onInputChange }
         />
         Super Trunfo
       </label>
@@ -16,4 +20,7 @@ export class TrunfoInput extends Component {
   }
 }
 
+TrunfoInput.propTypes = {
+  state: PropTypes.arrayOf().isRequired,
+};
 export default TrunfoInput;

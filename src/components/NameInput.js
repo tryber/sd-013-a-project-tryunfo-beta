@@ -3,16 +3,16 @@ import React, { Component } from 'react';
 
 export class NameInput extends Component {
   render() {
-    const { value, onChange } = this.props;
+    const { state: { cardName, onInputChange } } = this.props;
     return (
       <label htmlFor="name-input">
         Nome
         <input
-          value={ value }
-          onChange={ onChange }
+          value={ cardName }
+          onChange={ onInputChange }
           data-testid="name-input"
           type="text"
-          name="name-input"
+          name="cardName"
           id="name-input"
         />
       </label>
@@ -21,8 +21,7 @@ export class NameInput extends Component {
 }
 
 NameInput.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  state: PropTypes.arrayOf().isRequired,
 };
 
 export default NameInput;

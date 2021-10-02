@@ -9,21 +9,21 @@ class Form extends Component {
     return (
       <form>
         <fieldset>
-          <NameInput />
+          <NameInput state={ { ...state } } />
           <br />
-          <DescriptionInput state={ state } />
+          <DescriptionInput state={ { ...state } } />
           <br />
-          <AttrInput index="1" />
+          <AttrInput index="1" state={ { ...state } } />
           <br />
-          <AttrInput index="2" />
+          <AttrInput index="2" state={ { ...state } } />
           <br />
-          <AttrInput index="3" />
+          <AttrInput index="3" state={ { ...state } } />
           <br />
-          <ImageInput />
+          <ImageInput state={ { ...state } } />
           <br />
-          <RareInput />
+          <RareInput state={ { ...state } } />
           <br />
-          <TrunfoInput />
+          <TrunfoInput state={ { ...state } } />
           <br />
           <button type="button" data-testid="save-button">Salvar</button>
 
