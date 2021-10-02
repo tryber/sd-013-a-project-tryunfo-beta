@@ -29,11 +29,17 @@ export class App extends Component {
       <div className="container-tryunfo">
         <div className="container-preview">
           <div><Form state={ this.state } /></div>
-          <div><Card /></div>
+          <div>
+            <h1>Previa do Card</h1>
+            <Card />
+          </div>
         </div>
         <div className="container-display-card">
           <div><FilterCards /></div>
-          <div><Card /></div>
+          <div>
+            <h1>Lista De Card</h1>
+            <Card />
+          </div>
         </div>
       </div>
     );
