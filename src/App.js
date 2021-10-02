@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Card from './pages/Card';
-import FilterCards from './pages/FilterCards';
-import Form from './pages/Form';
+import Card from './components/Card';
+import FilterCards from './components/FilterCards';
+import Form from './components/Form';
 
-export class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +22,7 @@ export class App extends Component {
       filterRaridade: '',
       cardTrunfo: false,
       hasTrunfo: false,
-      isSaveButtonDisabled: false,
+      isSaveButtonDisabled: true,
       onInputChange: this.onInputChange,
       onSaveButtonClick: this.onSaveButtonClick,
     };
@@ -37,7 +37,8 @@ export class App extends Component {
   }
 
   onSaveButtonClick() {
-
+    console.log('fui chamando');
+    return true;
   }
 
   render() {
@@ -46,7 +47,7 @@ export class App extends Component {
         <div className="container-preview">
           <div>
             <Form
-              state={ { ...this.state } }
+              { ...this.state }
             />
           </div>
           <div>

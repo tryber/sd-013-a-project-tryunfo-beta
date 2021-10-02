@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-export class TrunfoInput extends Component {
+class TrunfoInput extends Component {
   render() {
     const { state: { cardTrunfo, onInputChange } } = this.props;
     return (
@@ -19,8 +19,11 @@ export class TrunfoInput extends Component {
     );
   }
 }
-
 TrunfoInput.propTypes = {
-  state: PropTypes.arrayOf().isRequired,
+  state: PropTypes.shape({
+    onInputChange: PropTypes.func,
+    cardTrunfo: PropTypes.bool,
+  }).isRequired,
 };
+
 export default TrunfoInput;

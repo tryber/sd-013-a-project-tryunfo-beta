@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-export class RareInput extends Component {
+class RareInput extends Component {
   render() {
     const { state: { cardRare, onInputChange } } = this.props;
     return (
@@ -13,7 +13,7 @@ export class RareInput extends Component {
           id="rare-input"
           data-testid="rare-input"
         >
-          <option value="normal" select>Nomal</option>
+          <option value="normal" select={ cardRare }>Nomal</option>
           <option value="raro">Raro</option>
           <option value="muito raro">Muito Raro</option>
         </select>
@@ -23,7 +23,10 @@ export class RareInput extends Component {
 }
 
 RareInput.propTypes = {
-  state: PropTypes.arrayOf().isRequired,
+  state: PropTypes.shape({
+    onInputChange: PropTypes.func,
+    cardRare: PropTypes.string,
+  }).isRequired,
 };
 
 export default RareInput;

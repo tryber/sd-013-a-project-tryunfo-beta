@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-export class ImageInput extends Component {
+class ImageInput extends Component {
   render() {
     const { state: { onInputChange, cardImage } } = this.props;
 
@@ -27,4 +27,10 @@ ImageInput.propTypes = {
   state: PropTypes.arrayOf().isRequired,
 };
 
+ImageInput.propTypes = {
+  state: PropTypes.shape({
+    onInputChange: PropTypes.func,
+    cardImage: PropTypes.string,
+  }).isRequired,
+};
 export default ImageInput;

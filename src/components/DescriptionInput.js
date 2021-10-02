@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-export class DescriptionInput extends Component {
+class DescriptionInput extends Component {
   render() {
     const { state: { onInputChange, cardDescription } } = this.props;
     return (
@@ -27,4 +27,10 @@ DescriptionInput.propTypes = {
   state: PropTypes.arrayOf().isRequired,
 };
 
+DescriptionInput.propTypes = {
+  state: PropTypes.shape({
+    onInputChange: PropTypes.func,
+    cardDescription: PropTypes.string,
+  }).isRequired,
+};
 export default DescriptionInput;

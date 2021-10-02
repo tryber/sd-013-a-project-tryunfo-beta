@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-export class AttrInput extends Component {
+class AttrInput extends Component {
   render() {
     const { index, state: { onInputChange }, state } = this.props;
     return (
@@ -21,8 +21,8 @@ export class AttrInput extends Component {
 }
 
 AttrInput.propTypes = {
-  state: PropTypes.objectOf().isRequired,
-  index: PropTypes.number.isRequired,
+  index: PropTypes.string.isRequired,
+  state: PropTypes.shape().isRequired,
 };
 
 export default AttrInput;
