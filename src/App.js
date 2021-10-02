@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Card from './components/Card';
-import FilterCards from './components/FilterCards';
-import Form from './components/Form';
+import Card from './pages/Card';
+import FilterCards from './pages/FilterCards';
+import Form from './pages/Form';
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <div className="container-tryunfo">
         <div className="container-preview">
-          <div><Form /></div>
+          <div><Form state={ this.state } /></div>
           <div><Card /></div>
         </div>
         <div className="container-display-card">
