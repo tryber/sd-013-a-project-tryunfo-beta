@@ -29,11 +29,17 @@
 }
 
 @keyframes entrance {
+
   0% { margin-left: 0; }
+
   25% { margin-left: 90%; }
+
   50% { margin-left: 0; }
+
   90% { margin-left: -90%; }
+
   100% { margin-left: 0; }
+
 }
 
 h3 {
