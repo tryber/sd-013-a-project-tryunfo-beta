@@ -5,7 +5,7 @@
 
 .header-container {
   display: flex;
-  font-family: Italianno, sans-serif;
+  font-family: Italianno , sans-serif;
   justify-content: center;
   margin-bottom: 100px;
   min-height: 100vh;
@@ -154,7 +154,7 @@ input, textarea, select {
   background-position: 150% 50%;
   background-size: 150px;
   border-radius: 35%;
-  font-family: Italianno, sans-serif;
+  font-family: Italianno , sans-serif;
   font-size: 45px;
   font-weight: 600;
   margin-top: 10px;
