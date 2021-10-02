@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 export class AttrInput extends Component {
@@ -16,5 +17,9 @@ export class AttrInput extends Component {
     );
   }
 }
+
+AttrInput.propTypes = {
+  index: PropTypes.number.isRequired,
+};
 
 export default AttrInput;

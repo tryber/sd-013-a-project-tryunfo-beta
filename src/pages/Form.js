@@ -1,17 +1,17 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { AttrInput,
   DescriptionInput, ImageInput, NameInput, RareInput, TrunfoInput } from '../components';
 
-export class Form extends Component {
+class Form extends Component {
   render() {
     const { state } = this.props;
-    console.log('state', state);
     return (
       <form>
         <fieldset>
           <NameInput />
           <br />
-          <DescriptionInput />
+          <DescriptionInput state={ state } />
           <br />
           <AttrInput index="1" />
           <br />
@@ -32,5 +32,9 @@ export class Form extends Component {
     );
   }
 }
+
+Form.propTypes = {
+  state: PropTypes.objectOf().isRequired,
+};
 
 export default Form;

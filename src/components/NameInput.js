@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 export class NameInput extends Component {
@@ -18,5 +19,10 @@ export class NameInput extends Component {
     );
   }
 }
+
+NameInput.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};
 
 export default NameInput;
