@@ -17,12 +17,16 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       cardList: [],
+      filterName: '',
+      filterRare: 'todas',
+      filterTrunfo: false,
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.excludeButton = this.excludeButton.bind(this);
     this.setIsSaveButtonDisabled = this.setIsSaveButtonDisabled.bind(this);
-    this.setFilterByName = this.setFilterByName.bind(this);
+    // this.setFilterByName = this.setFilterByName.bind(this);
+    // this.setFilterByRare = this.setFilterByRare.bind(this);
   }
 
   componentDidUpdate(_previousProps, previousState) {
@@ -77,11 +81,19 @@ class App extends React.Component {
     }));
   }
 
-  setFilterByName(value) {
-    this.setState((prevState) => ({
-      cardList: prevState.cardList.filter((item) => item.cardName.includes(value)),
-    }));
-  }
+  // setFilterByName(value) {
+  //   this.setState((prevState) => ({
+  //     cardList: prevState.cardList.filter((item) => item.cardName.includes(value)),
+  //   }));
+  // }
+
+  // setFilterByRare(value) {
+  //   if (value !== 'todas') {
+  //     this.setState((prevState) => ({
+  //       cardList: prevState.cardList.filter((item) => item.cardRare === value),
+  //     }));
+  //   }
+  // }
 
   setIsSaveButtonDisabled(state) {
     const {
@@ -141,6 +153,9 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       cardList,
+      filterName,
+      filterRare,
+      filterTrunfo,
       hasTrunfo,
       isSaveButtonDisabled,
     } = this.state;
@@ -172,23 +187,28 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
         />
         <Filters
-          setFilterByName={ (value) => this.setFilterByName(value) }
+          onInputChange={ this.onInputChange }
         />
         <section>
-          { cardList.map((item) => (
-            <Card
-              key={ item.id }
-              cardName={ item.cardName }
-              cardDescription={ item.cardDescription }
-              cardAttr1={ item.cardAttr1 }
-              cardAttr2={ item.cardAttr2 }
-              cardAttr3={ item.cardAttr3 }
-              cardImage={ item.cardImage }
-              cardRare={ item.cardRare }
-              cardTrunfo={ item.cardTrunfo }
-              onExcludeCard={ () => this.excludeButton(item.id) }
-            />
-          ))}
+          { cardList.filter((item) => item.cardName.includes(filterName))
+            .filter((item) => (filterRare !== 'todas'
+              ? item.cardRare === filterRare : item))
+            .filter((item) => (filterTrunfo === true
+              ? item.cardTrunfo === true : item))
+            .map((item) => (
+              <Card
+                key={ item.id }
+                cardName={ item.cardName }
+                cardDescription={ item.cardDescription }
+                cardAttr1={ item.cardAttr1 }
+                cardAttr2={ item.cardAttr2 }
+                cardAttr3={ item.cardAttr3 }
+                cardImage={ item.cardImage }
+                cardRare={ item.cardRare }
+                cardTrunfo={ item.cardTrunfo }
+                onExcludeCard={ () => this.excludeButton(item.id) }
+              />
+            ))}
         </section>
       </div>
     );
