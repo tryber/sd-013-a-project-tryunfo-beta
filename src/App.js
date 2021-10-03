@@ -58,8 +58,8 @@ class App extends Component {
         <div className="container-display-card">
           <div><FilterCards /></div>
           <div>
-            <h1>Lista De Card</h1>
-            <Card />
+            {/* <h1>Lista De Card</h1>
+            <Card /> */}
           </div>
         </div>
       </div>
