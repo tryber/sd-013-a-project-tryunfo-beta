@@ -4,7 +4,6 @@ import FilterCards from './components/FilterCards';
 import Form from './components/Form';
 
 const defaultState = {
-  cardList: [],
   cardName: '',
   cardDescription: '',
   cardAttr1: '0',
@@ -26,6 +25,8 @@ class App extends Component {
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.notEmptyString = this.notEmptyString.bind(this);
     this.validNumberAttr = this.validNumberAttr.bind(this);
+    this.saveCard = this.saveCardPreview.bind(this);
+    this.removeCard = this.removeCard.bind(this);
 
     this.state = {
       cardList: [],
@@ -73,9 +74,36 @@ class App extends Component {
   }
 
   onSaveButtonClick() {
+    const { cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+
+      cardTrunfo,
+      hasTrunfo } = this.state;
+    this.saveCardPreview({
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      hasTrunfo,
+    });
     this.setState(defaultState);
     return true;
   }
+
+  saveCardPreview(newCard) {
+    this.setState((prevState) => ({ cardList: [...prevState.cardList, newCard] }));
+  }
+
+  removeCard() {}
 
   notEmptyString(...texts) {
     return texts.every((text) => Boolean(text));
