@@ -81,9 +81,8 @@ class App extends Component {
       cardAttr3,
       cardImage,
       cardRare,
-
       cardTrunfo,
-      hasTrunfo } = this.state;
+    } = this.state;
     this.saveCardPreview({
       cardName,
       cardDescription,
@@ -93,9 +92,16 @@ class App extends Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      hasTrunfo,
     });
-    this.setState(defaultState);
+
+    // Apos salva o formulario, verificar se a lista tem um super card e muda o hasRtunfo.
+    this.setState({ ...defaultState }, () => {
+      const { cardList } = this.state;
+      if (cardList.find((card) => card.cardTrunfo)) {
+        this.setState({ hasTrunfo: true });
+      }
+    });
+
     return true;
   }
 

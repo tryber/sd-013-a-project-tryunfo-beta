@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 class TrunfoInput extends Component {
   render() {
-    const { state: { cardTrunfo, onInputChange } } = this.props;
+    const { state: { cardTrunfo, onInputChange, hasTrunfo } } = this.props;
+    if (hasTrunfo) return <p>Você já tem um Super Trunfo em seu baralho</p>;
     return (
       <label htmlFor="trunfo-input">
         <input
@@ -23,6 +24,7 @@ TrunfoInput.propTypes = {
   state: PropTypes.shape({
     onInputChange: PropTypes.func,
     cardTrunfo: PropTypes.bool,
+    hasTrunfo: PropTypes.bool,
   }).isRequired,
 };
 
