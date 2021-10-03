@@ -52,7 +52,7 @@ class App extends Component {
           </div>
           <div>
             <h1>Previa do Card</h1>
-            <Card />
+            <Card { ...this.state } />
           </div>
         </div>
         <div className="container-display-card">
