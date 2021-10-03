@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Card } from './components';
+import { Form, Card, Filters } from './components';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,6 +22,7 @@ class App extends React.Component {
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.excludeButton = this.excludeButton.bind(this);
     this.setIsSaveButtonDisabled = this.setIsSaveButtonDisabled.bind(this);
+    this.setFilterByName = this.setFilterByName.bind(this);
   }
 
   componentDidUpdate(_previousProps, previousState) {
@@ -73,6 +74,12 @@ class App extends React.Component {
           cardRare: prevState.cardRare,
           cardTrunfo: prevState.cardTrunfo,
         }],
+    }));
+  }
+
+  setFilterByName(value) {
+    this.setState((prevState) => ({
+      cardList: prevState.cardList.filter((item) => item.cardName.includes(value)),
     }));
   }
 
@@ -163,6 +170,9 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+        />
+        <Filters
+          setFilterByName={ (value) => this.setFilterByName(value) }
         />
         <section>
           { cardList.map((item) => (
