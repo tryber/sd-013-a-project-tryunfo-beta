@@ -10,7 +10,7 @@ class CardEditor extends Component {
       cardFields: {
         cardName: '',
         description: '',
-        numericInput: { speed: 0, power: 0, weight: 0 },
+        cardStats: { speed: 0, power: 0, weight: 0 },
         cardImage: '',
         cardRarity: '',
         superTrunfo: false,
