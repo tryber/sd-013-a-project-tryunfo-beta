@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export class Input extends Component {
+export class GenericInput extends Component {
   renderInput() {
-    const { label, name, placeholder, testId, type } = this.props;
-
+    const { label, name, placeholder, testId, type, onChange, value } = this.props;
     return (
       <label htmlFor={ name }>
         {label}
-        <input
-          data-testid={ testId }
-          name={ name }
-          id={ name }
-          placeholder={ placeholder }
-          type={ type }
-        />
+        {type === 'checkbox' ? (
+          <input
+            data-testid={ testId }
+            name={ name }
+            id={ name }
+            placeholder={ placeholder }
+            type="checkbox"
+            onChange={ onChange }
+            checked={ value }
+          />
+        )
+          : (
+            <input
+              data-testid={ testId }
+              name={ name }
+              id={ name }
+              placeholder={ placeholder }
+              type={ type }
+              onChange={ onChange }
+              value={ value }
+            />
+          )}
       </label>
     );
   }
 
   renderSelect() {
-    const { label, name, placeholder, options, testId } = this.props;
+    const { label, name, placeholder, options, testId, onChange, value } = this.props;
 
     return (
       <label htmlFor={ name }>
@@ -30,6 +44,8 @@ export class Input extends Component {
           name={ name }
           id={ name }
           placeholder={ placeholder }
+          onChange={ onChange }
+          value={ value }
         >
           {options.map((option, i) => (
             <option key={ i } value={ option }>{option}</option>
@@ -40,7 +56,7 @@ export class Input extends Component {
   }
 
   renderTextarea() {
-    const { label, name, placeholder, testId } = this.props;
+    const { label, name, placeholder, testId, onChange, value } = this.props;
 
     return (
       <label htmlFor={ name }>
@@ -50,6 +66,8 @@ export class Input extends Component {
           name={ name }
           id={ name }
           placeholder={ placeholder }
+          onChange={ onChange }
+          value={ value }
         />
       </label>
     );
@@ -67,18 +85,20 @@ export class Input extends Component {
   }
 }
 
-Input.defaultProps = {
+GenericInput.defaultProps = {
   type: 'text',
   options: [],
 };
 
-Input.propTypes = {
+GenericInput.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,
   type: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default Input;
+export default GenericInput;
