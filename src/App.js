@@ -132,6 +132,7 @@ class App extends Component {
   }
 
   render() {
+    const { cardList } = this.state;
     return (
       <div className="container-tryunfo">
         <div className="container-preview">
@@ -148,8 +149,8 @@ class App extends Component {
         <div className="container-display-card">
           <div><FilterCards /></div>
           <div>
-            {/* <h1>Lista De Card</h1>
-            <Card /> */}
+            <h1>Lista De Card</h1>
+            {cardList.map((card, i) => <Card key={ i } { ...card } />)}
           </div>
         </div>
       </div>
