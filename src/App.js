@@ -3,6 +3,21 @@ import Card from './components/Card';
 import FilterCards from './components/FilterCards';
 import Form from './components/Form';
 
+const defaultState = {
+  cardList: [],
+  cardName: '',
+  cardDescription: '',
+  cardAttr1: '0',
+  cardAttr2: '0',
+  cardAttr3: '0',
+  cardImage: '',
+  cardRare: 'normal',
+  filterName: '',
+  filterRaridade: '',
+  cardTrunfo: false,
+  hasTrunfo: false,
+  isSaveButtonDisabled: true,
+};
 class App extends Component {
   constructor(props) {
     super(props);
@@ -58,6 +73,7 @@ class App extends Component {
   }
 
   onSaveButtonClick() {
+    this.setState(defaultState);
     return true;
   }
 
