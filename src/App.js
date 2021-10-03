@@ -9,6 +9,9 @@ class App extends Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.notEmptyString = this.notEmptyString.bind(this);
+    this.validNumberAttr = this.validNumberAttr.bind(this);
+
     this.state = {
       cardList: [],
       cardName: '',
@@ -29,15 +32,52 @@ class App extends Component {
   }
 
   onInputChange(event) {
-    const { target } = event;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const { name } = target;
-    this.setState({
-      [name]: value });
+    this.setState({ isSaveButtonDisabled: true });
+    const { name } = event.target;
+    let { value } = event.target;
+    value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+
+    this.setState(({ [name]: value }), () => {
+      const {
+        cardName,
+        cardDescription,
+        cardImage,
+        cardRare,
+        cardAttr1,
+        cardAttr2,
+        cardAttr3,
+      } = this.state;
+
+      const textsTrue = this.notEmptyString(
+        cardName, cardDescription, cardImage, cardRare,
+      );
+      const numbersTrue = this.validNumberAttr(cardAttr1, cardAttr2, cardAttr3);
+
+      if (textsTrue && numbersTrue) this.setState({ isSaveButtonDisabled: false });
+    });
   }
 
   onSaveButtonClick() {
-    console.log('fui chamando');
+    return true;
+  }
+
+  notEmptyString(...texts) {
+    return texts.every((text) => Boolean(text));
+  }
+
+  validNumberAttr(...value) {
+    const MAX_TOTAL = 210;
+    const MAX_ATTR = 90;
+    const total = value.reduce((acc, curr) => Number(acc) + Number(curr), 0);
+
+    // maior que 210 para o codigo.
+    if (total > MAX_TOTAL) return false;
+
+    // Se tive numero maior igual a 0 condição verdadeira nego e return false
+    if (!value.every((curr) => Number(curr) >= 0)) return false;
+
+    // Se tive um maior que 90 condição e false vira verdade e return false.
+    if (!value.every((curr) => Number(curr) <= MAX_ATTR)) return false;
     return true;
   }
 

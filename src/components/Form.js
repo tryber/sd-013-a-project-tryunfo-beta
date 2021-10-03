@@ -47,7 +47,7 @@ class Form extends Component {
 
 Form.propTypes = {
   onSaveButtonClick: PropTypes.func.isRequired,
-  isSaveButtonDisabled: PropTypes.string.isRequired,
+  isSaveButtonDisabled: PropTypes.bool.isRequired,
 };
 
 export default Form;
