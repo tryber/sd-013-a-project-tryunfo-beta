@@ -150,7 +150,10 @@ class App extends Component {
           <div><FilterCards /></div>
           <div>
             <h1>Lista De Card</h1>
-            {cardList.map((card, i) => <Card key={ i } { ...card } />)}
+            <div>
+              {cardList.map((card, i) => <Card key={ i } { ...card } />)}
+              <button type="button" data-testid="delete-button">Excluir</button>
+            </div>
           </div>
         </div>
       </div>
