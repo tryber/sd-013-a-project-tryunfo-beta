@@ -59,3 +59,7 @@ PARA
 ## 10. Crie o filtro pelo nome da carta
 
 ...
+
+## Requisito 11
+
+Sugestão de teste, em minha aplicação houve um erro de lógica que mesmo assim o teste passava, no qual acredito que seria necessário verificar se a carta superTrunfo aparece quando estão todas listadas, pois o meu estava oculto e somente aparecia com a checkbox e validava de qualquer forma.

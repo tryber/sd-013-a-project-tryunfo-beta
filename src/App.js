@@ -21,6 +21,7 @@ class App extends React.Component {
       cards: [],
       filterName: '',
       filterRare: 'todas',
+      filterTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
     };
@@ -80,7 +81,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { cards, filterName, filterRare } = this.state;
+    const { cards, filterName, filterRare, filterTrunfo } = this.state;
     return (
       <main>
         <h1>Tryunfo</h1>
@@ -102,6 +103,16 @@ class App extends React.Component {
           value={ filterRare }
           onChange={ this.handleChange }
         />
+        <Input
+          name="cardTrunfo"
+          label="Super Trunfo"
+          testId="trunfo-filter"
+          type="checkbox"
+          value={ filterTrunfo }
+          onChange={ () => this.setState(
+            { filterTrunfo: !filterTrunfo },
+          ) }
+        />
         <Form
           { ...this.state }
           onInputChange={ this.handleChange }
@@ -109,6 +120,10 @@ class App extends React.Component {
         />
         <Card previewMode { ...this.state } />
         {cards
+          .filter((card) => {
+            if (filterTrunfo) return card.cardTrunfo === 'on' || card.cardTrunfo;
+            return card;
+          })
           .filter((card) => card.cardName.includes(filterName))
           .filter((card) => {
             const verifyCardRare = {
