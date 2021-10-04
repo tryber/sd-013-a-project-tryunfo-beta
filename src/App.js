@@ -20,6 +20,7 @@ class App extends React.Component {
       ...this.formState,
       cards: [],
       filterName: '',
+      filterRare: 'todas',
       hasTrunfo: false,
       isSaveButtonDisabled: true,
     };
@@ -79,18 +80,27 @@ class App extends React.Component {
   }
 
   render() {
-    const { cards, filterName } = this.state;
+    const { cards, filterName, filterRare } = this.state;
     return (
       <main>
         <h1>Tryunfo</h1>
         <Input
           testId="name-filter"
           name="filterName"
-          label="Buscar por nome"
+          label="Filtrar por nome"
           placeholder="Buscar por nome da carta"
           type="textarea"
           onChange={ this.handleChange }
           value={ filterName }
+        />
+        <Input
+          name="filterRare"
+          label="Filtrar por raridade"
+          testId="rare-filter"
+          type="select"
+          options={ ['normal', 'raro', 'muito raro', 'todas'] }
+          value={ filterRare }
+          onChange={ this.handleChange }
         />
         <Form
           { ...this.state }
@@ -100,6 +110,15 @@ class App extends React.Component {
         <Card previewMode { ...this.state } />
         {cards
           .filter((card) => card.cardName.includes(filterName))
+          .filter((card) => {
+            const verifyCardRare = {
+              normal: card.cardRare === 'normal',
+              raro: card.cardRare === 'raro',
+              'muito raro': card.cardRare === 'muito raro',
+            };
+            if (filterRare === 'todas') return card;
+            return verifyCardRare[filterRare];
+          })
           .map((card) => (<Card
             { ...card }
             onDeleteButtonClick={ this.handleDeleteCard }
