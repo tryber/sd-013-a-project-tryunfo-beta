@@ -140,7 +140,7 @@ class App extends Component {
   }
 
   render() {
-    const { cardList, filterName } = this.state;
+    const { cardList, filterName, filterRaridade } = this.state;
     return (
       <div className="container-tryunfo">
         <div className="container-preview">
@@ -161,6 +161,7 @@ class App extends Component {
             <div>
               {cardList
                 .filter((card) => card.cardName.includes(filterName))
+                .filter((card) => card.cardRare.startsWith(filterRaridade))
                 .map((card, i) => (
                   <div key={ i }>
                     <Card { ...card } />
