@@ -1,15 +1,6 @@
 import React from 'react';
 import { Card, Form } from './components';
-/*
-cardAttr1: PropTypes.string.isRequired,
-cardAttr2: PropTypes.string.isRequired,
-cardAttr3: PropTypes.string.isRequired,
-cardDescription: PropTypes.string.isRequired,
-cardImage: PropTypes.string.isRequired,
-cardName: PropTypes.string.isRequired,
-cardRare: PropTypes.string.isRequired,
-cardTrunfo: PropTypes.bool.isRequired,
-hasTriunfo: PropTypes.bool.isRequired, */
+import { validateNames, validateNumbers, validateSum } from './utils';
 
 class App extends React.Component {
   constructor(props) {
@@ -44,33 +35,22 @@ class App extends React.Component {
       cardName, cardDescription, cardImage, cardRare,
       cardAttr1, cardAttr2, cardAttr3,
     } = this.state;
-    const MAX_NUMBER = 90;
-    const MIN_NUMBER = 0;
+    const strings = [cardName, cardDescription, cardImage, cardRare];
+    const attrs = [cardAttr1, cardAttr2, cardAttr3];
+
     /* `Nome`, `Descrição`, `Imagem` e `Raridade ` devem conter alguma informação */
-    const validateNames = [cardName, cardDescription, cardImage, cardRare]
-      .every((stringValue) => stringValue !== '');
-
+    const areStringsValids = validateNames(strings);
     /*  atributos `attr1-input`, `attr2-input` e `attr3-input` máximo 90 pontos cada */
-    const validateNumbers = [Number(cardAttr1), Number(cardAttr2), Number(cardAttr3)]
-      .every((number) => number >= MIN_NUMBER && number <= MAX_NUMBER);
-
+    const areAttrsValids = validateNumbers(attrs);
     /* atributos `attr1-input` + `attr2-input` + `attr3-input` menor igual a 210. */
-    const validateSum = () => {
-      const MAX_SUM = 210;
-      const sum = [Number(cardAttr1), Number(cardAttr2), Number(cardAttr3)]
-        .reduce((acc, crr) => {
-          const value = acc + crr;
-          return value;
-        }, 0);
-      return sum <= MAX_SUM;
-    };
+    const areAttrsSumValid = validateSum(attrs);
 
     /* verificando se todas validações estão corretas */
-    const validation = [validateNames, validateNumbers, validateSum()]
+    const validation = [areStringsValids, areAttrsValids, areAttrsSumValid]
       .every((validate) => validate);
 
     /* negação pois as validações retornam o resultado esperado,
-       e o botão espero o oposto disso no disabled */
+    e o botão espera o oposto disso no disabled */
     return !validation;
   }
 
