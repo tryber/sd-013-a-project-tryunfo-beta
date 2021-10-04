@@ -18,6 +18,12 @@ export class Filters extends Component {
           <option>raro</option>
           <option>muito raro</option>
         </select>
+        <input
+          name="trunfo"
+          type="checkbox"
+          data-testid="trunfo-filter"
+          onChange={ handleFilter }
+        />
       </div>
     );
   }

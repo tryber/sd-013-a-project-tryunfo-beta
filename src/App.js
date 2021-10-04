@@ -22,6 +22,7 @@ class App extends React.Component {
       filters: {
         name: '',
         rarity: 'todas',
+        trunfo: '',
       },
     };
     this.onInputChange = this.onInputChange.bind(this);
@@ -35,7 +36,7 @@ class App extends React.Component {
     this.setState((prev) => ({
       filters: {
         ...prev.filters,
-        [target.name]: target.value,
+        [target.name]: target.name === 'trunfo' ? target.checked : target.value,
       },
     }));
   }
@@ -102,7 +103,7 @@ class App extends React.Component {
 
   render() {
     const { deck, filters } = this.state;
-    const { name, rarity } = filters;
+    const { name, rarity, trunfo } = filters;
     const preview = true;
     return (
       <div>
@@ -119,6 +120,12 @@ class App extends React.Component {
             .filter((card) => {
               if (rarity === 'todas') return true;
               if (card.cardRare === rarity) return true;
+              return false;
+            })
+            .filter((card) => {
+              if (trunfo && card.cardTrunfo) return true;
+              if (trunfo === '') return true;
+              if (!trunfo && !card.cardTrunfo) return true;
               return false;
             })
             .map((card) => (
