@@ -43,6 +43,7 @@ class FilterCards extends Component {
 }
 FilterCards.propTypes = {
   onInputChange: PropTypes.func.isRequired,
+  isCardTrunfo: PropTypes.bool.isRequired,
 };
 
 export default FilterCards;
