@@ -11,7 +11,12 @@ const INITIAL_STATE = {
   image: '',
   rare: '',
   trunfo: false,
+  disabled: true,
 };
+
+const SUM = 210;
+const MAX = 90;
+const ZERO = 0;
 
 class App extends React.Component {
   constructor() {
@@ -24,12 +29,28 @@ class App extends React.Component {
 
   onInputChange({ target: { name, value, checked } }) {
     return name === 'trunfo'
-      ? this.setState({ [name]: checked })
-      : this.setState({ [name]: value });
+      ? this.setState({ [name]: checked }, () => this.buttonDisabled())
+      : this.setState({ [name]: value }, () => this.buttonDisabled());
+  }
+
+  buttonDisabled() {
+    const { name, description, image, rare, attr1, attr2, attr3 } = this.state;
+    if (
+      name !== ''
+      && description !== ''
+      && image !== ''
+      && rare !== ''
+      && (parseInt(attr1, 10) + parseInt(attr2, 10) + (parseInt(attr3, 10)) <= SUM)
+      && (ZERO <= attr1 && attr1 <= MAX)
+      && (ZERO <= attr2 && attr2 <= MAX)
+      && (ZERO <= attr3 && attr3 <= MAX)
+    ) return this.setState({ disabled: false });
+    this.setState({ disabled: true });
   }
 
   render() {
-    const { name, description, attr1, attr2, attr3, image, rare, trunfo } = this.state;
+    const { name, description, attr1, attr2, attr3,
+      image, rare, trunfo, disabled } = this.state;
     return (
       <div>
         <Form
@@ -41,6 +62,7 @@ class App extends React.Component {
           cardImage={ image }
           cardRare={ rare }
           cardTrunfo={ trunfo }
+          isSaveButtonDisabled={ disabled }
           onInputChange={ this.onInputChange }
         />
         <Card
