@@ -140,7 +140,7 @@ class App extends Component {
   }
 
   render() {
-    const { cardList } = this.state;
+    const { cardList, filterName } = this.state;
     return (
       <div className="container-tryunfo">
         <div className="container-preview">
@@ -155,24 +155,26 @@ class App extends Component {
           </div>
         </div>
         <div className="container-display-card">
-          <div><FilterCards /></div>
+          <div><FilterCards { ...this.state } /></div>
           <div>
             <h1>Lista De Card</h1>
             <div>
-              {cardList.map((card, i) => (
-                <>
-                  <Card key={ i } { ...card } />
-                  <button
-                    id={ i }
-                    type="button"
-                    data-testid="delete-button"
-                    onClick={ this.removeCard }
-                  >
-                    Excluir
-                  </button>
-                </>
+              {cardList
+                .filter((card) => card.cardName.includes(filterName))
+                .map((card, i) => (
+                  <div key={ i }>
+                    <Card { ...card } />
+                    <button
+                      id={ i }
+                      type="button"
+                      data-testid="delete-button"
+                      onClick={ this.removeCard }
+                    >
+                      Excluir
+                    </button>
+                  </div>
 
-              ))}
+                ))}
 
             </div>
           </div>
