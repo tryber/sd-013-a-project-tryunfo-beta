@@ -4,7 +4,7 @@
 
 ### Readme
 - Remover para criar as pastas components dentro de src, pois ja vem criada no projeto
-
+- Ao inves de indicar `inputs` sugiro trocar por `campos` como foi sugerido pois pode ocorrer equivocos.
 ## Requisito 3
 
 ### Exiba a imagem usando a tag HTML img, com o atributo src que tenha o valor da prop cardImage e o atributo alt com o valor da prop cardName. Essa imagem também deve ter o atributo data-testid="image-card"
