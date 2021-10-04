@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Form } from './components';
+import { Card, Form, Input } from './components';
 import { validateNames, validateNumbers, validateSum } from './utils';
 
 class App extends React.Component {
@@ -19,6 +19,7 @@ class App extends React.Component {
     this.state = {
       ...this.formState,
       cards: [],
+      filterName: '',
       hasTrunfo: false,
       isSaveButtonDisabled: true,
     };
@@ -78,21 +79,32 @@ class App extends React.Component {
   }
 
   render() {
-    const { cards } = this.state;
+    const { cards, filterName } = this.state;
     return (
       <main>
         <h1>Tryunfo</h1>
+        <Input
+          testId="name-filter"
+          name="filterName"
+          label="Buscar por nome"
+          placeholder="Buscar por nome da carta"
+          type="textarea"
+          onChange={ this.handleChange }
+          value={ filterName }
+        />
         <Form
           { ...this.state }
           onInputChange={ this.handleChange }
           onSaveButtonClick={ this.handleSaveCard }
         />
         <Card previewMode { ...this.state } />
-        {cards.map((card) => (<Card
-          { ...card }
-          onDeleteButtonClick={ this.handleDeleteCard }
-          key={ card.cardName }
-        />))}
+        {cards
+          .filter((card) => card.cardName.includes(filterName))
+          .map((card) => (<Card
+            { ...card }
+            onDeleteButtonClick={ this.handleDeleteCard }
+            key={ card.cardName }
+          />))}
       </main>
     );
   }

@@ -15,3 +15,47 @@ Algo importante a ressaltar algo de fundamentos que temos a possibilidade de uti
 ```
 
 Acredito que mesmo sendo um exemplo simples, são coisas úteis que podem sempre reforçar alguns conceitos até mesmo porque isso pode ser utilizada em outras abordagens além do atributo alt, como até no mesmo quando há algo só como texto do elemento.
+
+## Requisito 9
+
+Algo que tive nesse projeto que percebi pelos testes, quando a chave Card esta com key referente ao index e não algo próprio o teste irá falhar, sugiro ativarem a regra no array para evitar erros de mal interpretação pois mesmo o código estando correto para o filtro, irá acontecer essa falha. 
+https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md
+
+```js
+// CORRETO POREM FALHA NO TESTE
+{cards.map((card, index) => (<Card
+          { ...card }
+          onDeleteButtonClick={ this.handleDeleteCard }
+          key={ index }
+        />))}
+
+// CORRETO
+{cards.map((card) => (<Card
+          { ...card }
+          onDeleteButtonClick={ this.handleDeleteCard }
+          key={ card.cardName }
+        />))}
+```
+
+## Sugestão de Mover Texto
+
+DE 
+
+* * *
+
+# Requisitos bônus
+
+## 10. Crie o filtro pelo nome da carta
+
+  Sua aplicação terá três filtros de listagem de cartas: filtro por **nome**, por **raridade** e por **Super Trunfo**. Os filtros **nome** e **raridade** são acumulativos. O filtro **Super Trunfo** funciona de forma independente.
+
+* * *
+
+PARA
+
+# Requisitos bônus
+
+  Sua aplicação terá três filtros de listagem de cartas: filtro por **nome**, por **raridade** e por **Super Trunfo**. Os filtros **nome** e **raridade** são acumulativos. O filtro **Super Trunfo** funciona de forma independente.
+## 10. Crie o filtro pelo nome da carta
+
+...
