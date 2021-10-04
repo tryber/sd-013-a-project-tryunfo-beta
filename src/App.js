@@ -5,9 +5,9 @@ import Form from './components/Form';
 const INITIAL_STATE = {
   name: '',
   description: '',
-  attr1: '',
-  attr2: '',
-  attr3: '',
+  attr1: 0,
+  attr2: 0,
+  attr3: 0,
   image: '',
   rare: '',
   trunfo: false,
@@ -25,6 +25,8 @@ class App extends React.Component {
     this.state = INITIAL_STATE;
 
     this.onInputChange = this.onInputChange.bind(this);
+    this.buttonDisabled = this.buttonDisabled.bind(this);
+    this.saveState = this.saveState.bind(this);
   }
 
   onInputChange({ target: { name, value, checked } }) {
@@ -48,6 +50,10 @@ class App extends React.Component {
     this.setState({ disabled: true });
   }
 
+  saveState() {
+    this.setState(INITIAL_STATE);
+  }
+
   render() {
     const { name, description, attr1, attr2, attr3,
       image, rare, trunfo, disabled } = this.state;
@@ -64,6 +70,7 @@ class App extends React.Component {
           cardTrunfo={ trunfo }
           isSaveButtonDisabled={ disabled }
           onInputChange={ this.onInputChange }
+          onSaveButtonClick={ this.saveState }
         />
         <Card
           cardName={ name }
