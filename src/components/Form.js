@@ -26,6 +26,7 @@ export class Form extends Component {
           name="cardName"
           value={ cardName }
           onChange={ onInputChange }
+          label="Nome"
         />
         <Input
           type="textarea"
@@ -33,6 +34,7 @@ export class Form extends Component {
           name="cardDescription"
           value={ cardDescription }
           onChange={ onInputChange }
+          label="Descrição"
         />
         <Input
           type="number"
