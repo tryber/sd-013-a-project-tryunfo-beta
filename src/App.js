@@ -33,6 +33,8 @@ class App extends React.Component {
 
   onSaveButtonClick(event) {
     event.preventDefault();
+    const { cardTrunfo } = this.state;
+    if (cardTrunfo) this.setState({ hasTrunfo: true });
     this.setState((prev) => {
       const card = { ...prev };
       delete card.deck;
@@ -46,7 +48,6 @@ class App extends React.Component {
         cardImage: '',
         cardRare: 'normal',
         cardTrunfo: false,
-        hasTrunfo: false,
         isSaveButtonDisabled: true,
       };
     });
