@@ -14,8 +14,9 @@ class App extends React.Component {
       cardName: '',
       cardRare: 'normal',
       cardTrunfo: false,
-      isSaveButtonDisabled: true,
       cards: [],
+      hasTrunfo: false,
+      isSaveButtonDisabled: true,
     };
     this.initialState = this.state;
     this.handleChange = this.handleChange.bind(this);
@@ -55,9 +56,10 @@ class App extends React.Component {
   }
 
   handleSaveCard(cardInfo) {
-    // onSaveButtonClick
     const { cards } = this.state;
-    this.setState({ ...this.initialState, cards: [cards, cardInfo] });
+    // cardTrunfo(checkbox checked) ? true : false === !!
+    const hasTrunfo = !!cardInfo.cardTrunfo;
+    this.setState({ ...this.initialState, cards: [cards, cardInfo], hasTrunfo });
   }
 
   render() {
