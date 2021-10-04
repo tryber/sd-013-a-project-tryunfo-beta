@@ -23,6 +23,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleDeleteCard = this.handleDeleteCard.bind(this);
     this.handleSaveCard = this.handleSaveCard.bind(this);
     this.handleValues = this.handleValues.bind(this);
   }
@@ -65,6 +66,17 @@ class App extends React.Component {
     this.setState({ cards: [...cards, cardInfo], hasTrunfo, ...this.formState });
   }
 
+  handleDeleteCard(cardName, cardTrunfo) {
+    const { cards } = this.state;
+    // cardTrunfo salvo no estado como on caso checked, logica inversa pois somente se tiver, o formulario aparece
+    const hasTrunfo = cardTrunfo !== 'on';
+    this.setState({
+      cards: [...cards].filter((card) => card.cardName !== cardName),
+      hasTrunfo,
+      ...this.formState,
+    });
+  }
+
   render() {
     const { cards } = this.state;
     return (
@@ -75,8 +87,12 @@ class App extends React.Component {
           onInputChange={ this.handleChange }
           onSaveButtonClick={ this.handleSaveCard }
         />
-        <Card { ...this.state } />
-        {cards.map((card, index) => <Card key={ index } { ...card } />)}
+        <Card previewMode { ...this.state } />
+        {cards.map((card) => (<Card
+          { ...card }
+          onDeleteButtonClick={ this.handleDeleteCard }
+          key={ card.cardName }
+        />))}
       </main>
     );
   }

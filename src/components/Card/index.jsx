@@ -11,6 +11,7 @@ Exiba o texto Super Trunfo somente quando o valor da prop cardTrunfo for true. V
       cardAttr1, cardAttr2, cardAttr3,
       cardDescription, cardName,
       cardImage, cardRare, cardTrunfo,
+      previewMode, onDeleteButtonClick,
     } = this.props;
     return (
       <section>
@@ -24,10 +25,23 @@ Exiba o texto Super Trunfo somente quando o valor da prop cardTrunfo for true. V
         </article>
         <article data-testid="rare-card">{cardRare}</article>
         {cardTrunfo && <article data-testid="trunfo-card">Super Trunfo</article>}
+        {!previewMode && (
+          <button
+            data-testid="delete-button"
+            onClick={ () => onDeleteButtonClick(cardName, cardTrunfo) }
+            type="button"
+          >
+            Excluir
+          </button>
+        )}
       </section>
     );
   }
 }
+
+Card.defaultProps = {
+  onDeleteButtonClick: null,
+};
 
 Card.propTypes = {
   cardAttr1: PropTypes.string.isRequired,
@@ -38,6 +52,8 @@ Card.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  onDeleteButtonClick: PropTypes.func,
+  previewMode: PropTypes.bool.isRequired,
 };
 
 export default Card;

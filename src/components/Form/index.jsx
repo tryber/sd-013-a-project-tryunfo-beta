@@ -3,13 +3,6 @@ import React, { Component } from 'react';
 import Input from '../Input';
 
 export class Form extends Component {
-  /* shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.cardName !== nextProps.cardName) {
-      return true;
-    }
-    return false;
-  } */
-
   render() {
     const {
       cardName,
