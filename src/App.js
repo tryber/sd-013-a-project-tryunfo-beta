@@ -83,6 +83,7 @@ class App extends React.Component {
 
   render() {
     const { deck } = this.state;
+    const preview = true;
     return (
       <div>
         <Form
@@ -90,6 +91,7 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
         />
+        <Card { ...this.state } preview={ preview } />
         {
           deck
             .map((card, index) => (

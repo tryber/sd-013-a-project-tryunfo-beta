@@ -14,6 +14,7 @@ export class Card extends Component {
       cardTrunfo,
       index,
       deleteCard,
+      preview,
     } = this.props;
     return (
       <div>
@@ -25,13 +26,17 @@ export class Card extends Component {
         <p data-testid="attr1-card">{ cardAttr1}</p>
         <p data-testid="attr2-card">{ cardAttr2}</p>
         <p data-testid="attr3-card">{ cardAttr3}</p>
-        <button
-          data-testid="delete-button"
-          type="button"
-          onClick={ () => deleteCard(index) }
-        >
-          Excluir
-        </button>
+        {
+          !preview && (
+            <button
+              data-testid="delete-button"
+              type="button"
+              onClick={ () => deleteCard(index) }
+            >
+              Excluir
+            </button>
+          )
+        }
       </div>
     );
   }
@@ -50,6 +55,7 @@ Card.propTypes = {
   ]).isRequired,
   index: PropTypes.number.isRequired,
   deleteCard: PropTypes.func.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 export default Card;
