@@ -5,7 +5,8 @@ import { validateNames, validateNumbers, validateSum } from './utils';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    // para resetar formulario
+    this.formState = {
       cardAttr1: 0,
       cardAttr2: 0,
       cardAttr3: 0,
@@ -14,11 +15,13 @@ class App extends React.Component {
       cardName: '',
       cardRare: 'normal',
       cardTrunfo: false,
+    };
+    this.state = {
+      ...this.formState,
       cards: [],
       hasTrunfo: false,
       isSaveButtonDisabled: true,
     };
-    this.initialState = this.state;
     this.handleChange = this.handleChange.bind(this);
     this.handleSaveCard = this.handleSaveCard.bind(this);
     this.handleValues = this.handleValues.bind(this);
@@ -59,10 +62,11 @@ class App extends React.Component {
     const { cards } = this.state;
     // cardTrunfo(checkbox checked) ? true : false === !!
     const hasTrunfo = !!cardInfo.cardTrunfo;
-    this.setState({ ...this.initialState, cards: [cards, cardInfo], hasTrunfo });
+    this.setState({ cards: [...cards, cardInfo], hasTrunfo, ...this.formState });
   }
 
   render() {
+    const { cards } = this.state;
     return (
       <main>
         <h1>Tryunfo</h1>
@@ -72,6 +76,7 @@ class App extends React.Component {
           onSaveButtonClick={ this.handleSaveCard }
         />
         <Card { ...this.state } />
+        {cards.map((card, index) => <Card key={ index } { ...card } />)}
       </main>
     );
   }
