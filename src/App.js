@@ -21,6 +21,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       filters: {
         name: '',
+        rarity: 'todas',
       },
     };
     this.onInputChange = this.onInputChange.bind(this);
@@ -34,7 +35,7 @@ class App extends React.Component {
     this.setState((prev) => ({
       filters: {
         ...prev.filters,
-        name: target.value,
+        [target.name]: target.value,
       },
     }));
   }
@@ -101,7 +102,7 @@ class App extends React.Component {
 
   render() {
     const { deck, filters } = this.state;
-    const { name } = filters;
+    const { name, rarity } = filters;
     const preview = true;
     return (
       <div>
@@ -115,6 +116,11 @@ class App extends React.Component {
         {
           deck
             .filter((card) => card.cardName.includes(name))
+            .filter((card) => {
+              if (rarity === 'todas') return true;
+              if (card.cardRare === rarity) return true;
+              return false;
+            })
             .map((card) => (
               <Card
                 key={ card.cardName }

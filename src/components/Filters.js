@@ -6,7 +6,18 @@ export class Filters extends Component {
     const { handleFilter } = this.props;
     return (
       <div>
-        <input type="text" data-testid="name-filter" onChange={ handleFilter } />
+        <input
+          type="text"
+          data-testid="name-filter"
+          name="name"
+          onChange={ handleFilter }
+        />
+        <select name="rarity" onChange={ handleFilter } data-testid="rare-filter">
+          <option>todas</option>
+          <option>normal</option>
+          <option>raro</option>
+          <option>muito raro</option>
+        </select>
       </div>
     );
   }
