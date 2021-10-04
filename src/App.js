@@ -159,8 +159,8 @@ class App extends Component {
             <h1>Lista De Card</h1>
             <div>
               {cardList.map((card, i) => (
-                <div key={ i }>
-                  <Card { ...card } />
+                <>
+                  <Card key={ i } { ...card } />
                   <button
                     id={ i }
                     type="button"
@@ -169,7 +169,8 @@ class App extends Component {
                   >
                     Excluir
                   </button>
-                </div>
+                </>
+
               ))}
 
             </div>
