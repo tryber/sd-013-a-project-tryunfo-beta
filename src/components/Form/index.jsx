@@ -3,6 +3,13 @@ import React, { Component } from 'react';
 import Input from '../Input';
 
 export class Form extends Component {
+  /* shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.cardName !== nextProps.cardName) {
+      return true;
+    }
+    return false;
+  } */
+
   render() {
     const {
       cardName,
@@ -93,7 +100,16 @@ export class Form extends Component {
         <button
           data-testid="save-button"
           type="button"
-          onClick={ onSaveButtonClick }
+          onClick={ () => onSaveButtonClick({
+            cardName,
+            cardDescription,
+            cardAttr1,
+            cardAttr2,
+            cardAttr3,
+            cardImage,
+            cardRare,
+            cardTrunfo,
+          }) }
           disabled={ isSaveButtonDisabled }
         >
           Salvar

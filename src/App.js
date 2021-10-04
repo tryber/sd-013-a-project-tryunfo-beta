@@ -6,27 +6,27 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
       cardDescription: '',
       cardImage: '',
       cardName: '',
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
+      cards: [],
     };
+    this.initialState = this.state;
     this.handleChange = this.handleChange.bind(this);
+    this.handleSaveCard = this.handleSaveCard.bind(this);
     this.handleValues = this.handleValues.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
     this.setState(() => {
       const validationButton = this.handleValues();
-      return {
-        [name]: value,
-        isSaveButtonDisabled: validationButton,
-      };
+      return { [name]: value, isSaveButtonDisabled: validationButton };
     });
   }
 
@@ -54,15 +54,21 @@ class App extends React.Component {
     return !validation;
   }
 
-  handleSave() {
+  handleSaveCard(cardInfo) {
     // onSaveButtonClick
+    const { cards } = this.state;
+    this.setState({ ...this.initialState, cards: [cards, cardInfo] });
   }
 
   render() {
     return (
       <main>
         <h1>Tryunfo</h1>
-        <Form { ...this.state } onInputChange={ this.handleChange } />
+        <Form
+          { ...this.state }
+          onInputChange={ this.handleChange }
+          onSaveButtonClick={ this.handleSaveCard }
+        />
         <Card { ...this.state } />
       </main>
     );
