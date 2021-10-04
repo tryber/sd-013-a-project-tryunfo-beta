@@ -23,6 +23,7 @@ class App extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.checkInputs = this.checkInputs.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.deleteCard = this.deleteCard.bind(this);
   }
 
   onInputChange({ target }) {
@@ -72,6 +73,14 @@ class App extends React.Component {
     }
   }
 
+  deleteCard(index) {
+    const { deck } = this.state;
+    if (deck[index].cardTrunfo) this.setState({ hasTrunfo: false });
+    this.setState((prev) => ({
+      deck: prev.deck.filter((card, idx) => index !== idx),
+    }));
+  }
+
   render() {
     const { deck } = this.state;
     return (
@@ -82,7 +91,14 @@ class App extends React.Component {
           onSaveButtonClick={ this.onSaveButtonClick }
         />
         {
-          deck.map((card, index) => <Card key={ index } { ...card } />)
+          deck
+            .map((card, index) => (
+              <Card
+                key={ index }
+                { ...card }
+                index={ index }
+                deleteCard={ this.deleteCard }
+              />))
         }
       </div>
     );
