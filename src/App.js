@@ -109,7 +109,14 @@ class App extends Component {
     this.setState((prevState) => ({ cardList: [...prevState.cardList, newCard] }));
   }
 
-  removeCard() {}
+  removeCard(event) {
+    const { id } = event.target;
+    const { cardList } = this.state;
+
+    if (cardList[id].cardTrunfo) this.setState({ hasTrunfo: false });
+    cardList.splice(id, 1);
+    this.setState({ cardList: [...cardList] });
+  }
 
   notEmptyString(...texts) {
     return texts.every((text) => Boolean(text));
@@ -151,8 +158,20 @@ class App extends Component {
           <div>
             <h1>Lista De Card</h1>
             <div>
-              {cardList.map((card, i) => <Card key={ i } { ...card } />)}
-              <button type="button" data-testid="delete-button">Excluir</button>
+              {cardList.map((card, i) => (
+                <div key={ i }>
+                  <Card { ...card } />
+                  <button
+                    id={ i }
+                    type="button"
+                    data-testid="delete-button"
+                    onClick={ this.removeCard }
+                  >
+                    Excluir
+                  </button>
+                </div>
+              ))}
+
             </div>
           </div>
         </div>
