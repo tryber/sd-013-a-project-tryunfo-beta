@@ -3,19 +3,6 @@ import PropTypes from 'prop-types';
 import InputField from './InputField';
 
 const rarity = ['normal', 'raro', 'muito raro'];
-// const INITIAL_STATE = {
-//   cardName: '',
-//   cardDescription: '',
-//   cardAttr1: '',
-//   cardAttr2: '',
-//   cardAttr3: '',
-//   cardImage: '',
-//   cardRare: '',
-//   cardTrunfo: false,
-//   hasTrunfo: false,
-//   isSaveButtonDisabled: true,
-
-// }
 
 class Form extends Component {
   render() {

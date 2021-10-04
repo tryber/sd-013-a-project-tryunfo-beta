@@ -12,7 +12,7 @@ class InputField extends Component {
           name={ name }
           id={ `${name}-input` }
           data-testid={ `${name}-input` }
-          onChange={ () => onInputChange() }
+          onChange={ onInputChange }
           value={ value }
         />
       </label>
