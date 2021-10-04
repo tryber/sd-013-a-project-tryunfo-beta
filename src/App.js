@@ -14,6 +14,7 @@ const defaultState = {
   filterName: '',
   filterRaridade: '',
   cardTrunfo: false,
+  isCardTrunfo: false,
   hasTrunfo: false,
   isSaveButtonDisabled: true,
 };
@@ -41,6 +42,7 @@ class App extends Component {
       filterRaridade: '',
       cardTrunfo: false,
       hasTrunfo: false,
+      isCardTrunfo: false,
       isSaveButtonDisabled: true,
       onInputChange: this.onInputChange,
       onSaveButtonClick: this.onSaveButtonClick,
@@ -140,7 +142,44 @@ class App extends Component {
   }
 
   render() {
-    const { cardList, filterName, filterRaridade } = this.state;
+    const { cardList, filterName, filterRaridade, isCardTrunfo } = this.state;
+
+    const cardNotSuperTrufo = (
+      cardList.filter((card) => card.cardName.includes(filterName))
+        .filter((card) => card.cardRare.startsWith(filterRaridade))
+        .map((card, i) => (
+          <div key={ i }>
+            <Card { ...card } />
+            <button
+              id={ i }
+              type="button"
+              data-testid="delete-button"
+              onClick={ this.removeCard }
+            >
+              Excluir
+            </button>
+          </div>
+
+        )));
+    const cardSuperTrufo = (
+      cardList
+        .filter((card) => card.cardTrunfo)
+        .map((card, i) => (
+          <div key={ i * 1 }>
+            <Card { ...card } />
+            <button
+              id={ i }
+              type="button"
+              data-testid="delete-button"
+              onClick={ this.removeCard }
+            >
+              Excluir
+            </button>
+          </div>
+
+        ))
+    );
+
     return (
       <div className="container-tryunfo">
         <div className="container-preview">
@@ -159,24 +198,7 @@ class App extends Component {
           <div>
             <h1>Lista De Card</h1>
             <div>
-              {cardList
-                .filter((card) => card.cardName.includes(filterName))
-                .filter((card) => card.cardRare.startsWith(filterRaridade))
-                .map((card, i) => (
-                  <div key={ i }>
-                    <Card { ...card } />
-                    <button
-                      id={ i }
-                      type="button"
-                      data-testid="delete-button"
-                      onClick={ this.removeCard }
-                    >
-                      Excluir
-                    </button>
-                  </div>
-
-                ))}
-
+              {!isCardTrunfo ? cardNotSuperTrufo : cardSuperTrufo }
             </div>
           </div>
         </div>
