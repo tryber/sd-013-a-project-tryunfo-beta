@@ -72,7 +72,7 @@ export class Form extends Component {
           onChange={ onInputChange }
         />
         <Input
-          name="cardRarity"
+          name="cardRare"
           label="Raridade da carta"
           placeholder="Insira a raridade da carta"
           testId="rare-input"
