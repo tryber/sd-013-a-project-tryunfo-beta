@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Form } from './components';
+import { Card, Form, Filters } from './components';
 
 const MAX = 90;
 const MAX_SUM = 210;
@@ -19,11 +19,24 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
+      filters: {
+        name: '',
+      },
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.checkInputs = this.checkInputs.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
+  }
+
+  handleFilter({ target }) {
+    this.setState((prev) => ({
+      filters: {
+        ...prev.filters,
+        name: target.value,
+      },
+    }));
   }
 
   onInputChange({ target }) {
@@ -39,6 +52,7 @@ class App extends React.Component {
     this.setState((prev) => {
       const card = { ...prev };
       delete card.deck;
+      delete card.filters;
       return {
         deck: [...prev.deck, card],
         cardName: '',
@@ -86,7 +100,8 @@ class App extends React.Component {
   }
 
   render() {
-    const { deck } = this.state;
+    const { deck, filters } = this.state;
+    const { name } = filters;
     const preview = true;
     return (
       <div>
@@ -96,13 +111,14 @@ class App extends React.Component {
           onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card { ...this.state } preview={ preview } />
+        <Filters handleFilter={ this.handleFilter } />
         {
           deck
-            .map((card, index) => (
+            .filter((card) => card.cardName.includes(name))
+            .map((card) => (
               <Card
                 key={ card.cardName }
                 { ...card }
-                index={ index }
                 deleteCard={ this.deleteCard }
               />))
         }
