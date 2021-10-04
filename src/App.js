@@ -114,6 +114,7 @@ class App extends Component {
     const { cardList } = this.state;
 
     if (cardList[id].cardTrunfo) this.setState({ hasTrunfo: false });
+
     cardList.splice(id, 1);
     this.setState({ cardList: [...cardList] });
   }
