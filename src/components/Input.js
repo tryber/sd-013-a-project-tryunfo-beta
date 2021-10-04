@@ -40,7 +40,7 @@ export class Input extends Component {
           type={ type }
           data-testid={ testid }
           value={ value }
-          checked={ value }
+          checked={ value ? 1 : 0 }
           onChange={ onChange }
         />
       </label>

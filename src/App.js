@@ -73,11 +73,15 @@ class App extends React.Component {
     }
   }
 
-  deleteCard(index) {
+  deleteCard(name) {
     const { deck } = this.state;
-    if (deck[index].cardTrunfo) this.setState({ hasTrunfo: false });
+    deck.forEach((card) => {
+      if (card.cardName === name && card.cardTrunfo) {
+        this.setState({ hasTrunfo: false });
+      }
+    });
     this.setState((prev) => ({
-      deck: prev.deck.filter((card, idx) => index !== idx),
+      deck: prev.deck.filter((card) => name !== card.cardName),
     }));
   }
 
@@ -96,7 +100,7 @@ class App extends React.Component {
           deck
             .map((card, index) => (
               <Card
-                key={ index }
+                key={ card.cardName }
                 { ...card }
                 index={ index }
                 deleteCard={ this.deleteCard }
