@@ -96,7 +96,7 @@ GenericInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,
   type: PropTypes.string,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType(PropTypes.string, PropTypes.number).isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.string),
 };

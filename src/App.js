@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from './components';
+import { Card, Form } from './components';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +16,8 @@ class App extends React.Component {
     return (
       <main>
         <h1>Tryunfo</h1>
-        <Form cardTrunfo />
+        <Form cardTrunfo onInputChange={ this.handleChange } />
+        <Card { ...this.state } />
       </main>
     );
   }
