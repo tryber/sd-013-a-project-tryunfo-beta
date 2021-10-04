@@ -73,6 +73,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { deck } = this.state;
     return (
       <div>
         <Form
@@ -80,7 +81,9 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
         />
-        <Card { ...this.state } />
+        {
+          deck.map((card, index) => <Card key={ index } { ...card } />)
+        }
       </div>
     );
   }
