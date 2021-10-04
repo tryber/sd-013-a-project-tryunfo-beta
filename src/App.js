@@ -8,11 +8,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      deck: [],
       cardName: '',
       cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
@@ -21,6 +22,7 @@ class App extends React.Component {
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.checkInputs = this.checkInputs.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
   }
 
   onInputChange({ target }) {
@@ -31,7 +33,23 @@ class App extends React.Component {
 
   onSaveButtonClick(event) {
     event.preventDefault();
-    console.log('salvou');
+    this.setState((prev) => {
+      const card = { ...prev };
+      delete card.deck;
+      return {
+        deck: [...prev.deck, card],
+        cardName: '',
+        cardDescription: '',
+        cardAttr1: 0,
+        cardAttr2: 0,
+        cardAttr3: 0,
+        cardImage: '',
+        cardRare: 'normal',
+        cardTrunfo: false,
+        hasTrunfo: false,
+        isSaveButtonDisabled: true,
+      };
+    });
   }
 
   checkInputs() {
