@@ -1,6 +1,6 @@
 /* CARD EDITOR CSS */
 .main-card-editor {
-  background-image: linear-gradient(rgb(0, 0, 0), rgb(180, 190, 174));
+  background-image: linear-gradient(rgb(14, 13, 13), rgb(180, 190, 174));
   color: aliceblue;
   display: flex;
   padding: 20px;
@@ -19,7 +19,7 @@
 
 /*  CARDFORM CSS */
 .card-form {
-  background-image: linear-gradient(rgb(0, 0, 0), rgb(180, 190, 174));
+  background-image: linear-gradient(rgb(7, 7, 7), rgb(180, 190, 174));
   width: 50%;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .card-board {
-  background: rgb(170, 170, 170);
+  background: gray;
   height: 100%;
   margin: 0.3rem auto;
   padding: 0.5rem 0;
@@ -45,7 +45,7 @@
 }
 
 .title {
-  background: rgb(255, 255, 255);
+  background: white;
   border-radius: 0.4rem;
   box-sizing: border-box;
   display: flex;
@@ -81,7 +81,7 @@
 }
 
 .type {
-  background: rgb(255, 255, 255);
+  background: white;
   border-radius: 0.4rem;
   box-sizing: border-box;
   font-size: 0.9rem;
