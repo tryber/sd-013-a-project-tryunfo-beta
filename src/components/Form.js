@@ -6,8 +6,7 @@ const RARITY_OPTIONS = ['normal', 'raro', 'muito raro'];
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = { validated: false };
-    this.renderAttributes = this.renderAttributes.bind(this);
+    // this.state = { validated: false };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
   }
@@ -30,46 +29,8 @@ class Form extends Component {
     }
   }
 
-  handleOnClick() {
-
-  }
-
-  renderAttributes(cardStats) { // attributes = [ [speed,0],[power,2],[weight,220] ]
-    const { onInputChange } = this.props;
-    const attributes = Object.entries(cardStats);
-    return attributes.map((attribute, index) => {
-      const attrName = attribute[0];
-      const attrValue = attribute[1];
-      return (
-        <RForm.Group
-          as={ Row }
-          key={ `${attrName}-X-${attrValue}-${index}` }
-          className="mb-3"
-          controlId="exampleForm.ControlTextarea1"
-        >
-          <RForm.Label column sm="2">
-            {attrName}
-          </RForm.Label>
-          <Col sm="2">
-            <RForm.Control
-              name={ attrName }
-              data-testid={ `attr${index + 1}-input` }
-              type="number"
-              value={ attrValue }
-              onChange={ ({ target: { name, value } }) => {
-                const checkValue = Number(value) || 0;
-                onInputChange(name, checkValue);
-              } }
-              min="1"
-              required
-            />
-          </Col>
-        </RForm.Group>);
-    });
-  }
-
   render() {
-    const { validated } = this.state;
+    // const { validated } = this.state;
     const {
       onInputChange,
       cardName,
@@ -82,13 +43,14 @@ class Form extends Component {
       cardTrunfo,
       isSaveButtonDisabled,
     } = this.props;
-    const attributes = { cardAttr1, cardAttr2, cardAttr3 };
+
     return (
       <RForm
-        noValidate
-        validated={ validated }
+        // noValidate
+        // validated={ validated }
         onSubmit={ this.handleSubmit }
         className="card-form"
+        disabled={ isSaveButtonDisabled }
       >
         <RForm.Group as={ Row } className="mb-3" controlId="FormBasicName">
           <RForm.Label column sm="2">Card Name</RForm.Label>
@@ -103,13 +65,72 @@ class Form extends Component {
               required
             />
           </Col>
-          {/* <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text> */}
         </RForm.Group>
-
-        {this.renderAttributes(attributes)}
-
+        <RForm.Group
+          as={ Row }
+          className="mb-3"
+          controlId="exampleForm.ControlTextarea1"
+        >
+          <RForm.Label column sm="2">cardAttr1</RForm.Label>
+          <Col sm="8">
+            <RForm.Control
+              name="cardAttr1"
+              data-testid="attr1-input"
+              type="number"
+              value={ cardAttr1 }
+              onChange={ ({ target: { name, value } }) => {
+                // const checkValue = Number(value);
+                // if (checkValue > 90) return 90;
+                // if (checkValue < 0) return 0;
+                onInputChange(name, value);
+              } }
+              required
+            />
+          </Col>
+        </RForm.Group>
+        <RForm.Group
+          as={ Row }
+          className="mb-3"
+          controlId="exampleForm.ControlTextarea2"
+        >
+          <RForm.Label column sm="2">cardAttr2</RForm.Label>
+          <Col sm="8">
+            <RForm.Control
+              name="cardAttr2"
+              data-testid="attr2-input"
+              type="number"
+              value={ cardAttr2 }
+              onChange={ ({ target: { name, value } }) => {
+                // if (checkValue > 90) return 90;
+                // if (checkValue < 0) return 0;
+                onInputChange(name, value);
+              } }
+              required
+            />
+          </Col>
+        </RForm.Group>
+        <RForm.Group
+          as={ Row }
+          className="mb-3"
+          controlId="exampleForm.ControlTextarea3"
+        >
+          <RForm.Label column sm="2">cardAttr3</RForm.Label>
+          <Col sm="8">
+            <RForm.Control
+              name="cardAttr3"
+              data-testid="attr3-input"
+              type="number"
+              value={ Number(cardAttr3) }
+              onChange={ ({ target: { name, value } }) => {
+                const checkValue = Number(value);
+                // if (checkValue > 90) return 90;
+                // if (checkValue < 0) return 0;
+                onInputChange(name, checkValue);
+              } }
+              required
+            />
+          </Col>
+        </RForm.Group>
         <RForm.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <RForm.Label>Description</RForm.Label>
           <RForm.Control
@@ -158,7 +179,7 @@ class Form extends Component {
             type="checkbox"
             label="Super Trunfo"
             data-testid="trunfo-input"
-            onClick={ ({ target: { name, checked } }) => onInputChange(name, checked) }
+            onChange={ ({ target: { name, checked } }) => onInputChange(name, checked) }
             checked={ cardTrunfo }
             variant="dark"
           />
