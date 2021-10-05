@@ -6,42 +6,75 @@ import Card from './Card';
 class CardEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = { // level 0 change
-      cardFields: { // level 1 change
-        cardName: '',
-        description: '',
-        cardStats: { speed: 0, power: 0, weight: 0 }, // level 2 change
-        cardImage: '',
-        cardRarity: '',
-        superTrunfo: false,
-      },
+    this.state = {
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: true,
+      hasTrunfo: false,
+      isSaveButtonDisabled: false,
     };
-    this.handleCardFields = this.handleCardFields.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
   }
 
-  handleCardFields(name, value) {
-    this.setState((prevState) => (
-      {
-        ...prevState,
-        cardFields: { // level 1 change
-          ...prevState.cardFields,
-          [name]: value,
-        },
-      }));
-
-    // this.setState((prevState) => ({
-    //   ...prevState,
-    //   ...{ ...{ cardFields: { [name]: value } } },
-    // }));
+  onInputChange(name, value) {
+    this.setState((prevState) => ({ ...prevState, [name]: value }));
     console.log(name, value);
   }
 
+  onSaveButtonClick(name) {
+    this.setState((prevState) => ({
+      ...prevState,
+      [name]: !prevState.isSaveButtonDisabled,
+    }));
+  }
+
   render() {
-    const { cardFields } = this.state;
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardStats,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      hasTrunfo,
+    } = this.state;
     return (
       <div className="main-card-editor">
-        <Form cardFields={ cardFields } handleCardFields={ this.handleCardFields } />
-        <Card cardFields={ cardFields } handleCardFields={ this.handleCardFields } />
+        <Form
+          cardName={ cardName }
+          cardDescription={ cardDescription }
+          cardAttr1={ cardAttr1 }
+          cardAttr2={ cardAttr2 }
+          cardAttr3={ cardAttr3 }
+          cardStats={ cardStats }
+          cardImage={ cardImage }
+          cardRare={ cardRare }
+          cardTrunfo={ cardTrunfo }
+          onInputChange={ this.onInputChange }
+          onSaveButtonClick={ this.onSaveButtonClick }
+        />
+        <Card
+          cardName={ cardName }
+          cardDescription={ cardDescription }
+          cardAttr1={ cardAttr1 }
+          cardAttr2={ cardAttr2 }
+          cardAttr3={ cardAttr3 }
+          cardStats={ cardStats }
+          cardImage={ cardImage }
+          cardRare={ cardRare }
+          cardTrunfo={ cardTrunfo }
+          onInputChange={ this.onInputChange }
+          onSaveButtonClick={ this.onSaveButtonClick }
+        />
       </div>
     );
   }

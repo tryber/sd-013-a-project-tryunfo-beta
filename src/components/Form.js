@@ -13,16 +13,18 @@ class Form extends Component {
   }
 
   handleOnChange({ target: { name, value } }) {
-    const { handleCardFields } = this.props;
-    handleCardFields(name, value);
+    const { onInputChange } = this.props;
+    onInputChange(name, value);
   }
 
   handleSubmit(e) {
-    // console.log(e);
     e.preventDefault();
-    const f = e.currentTarget;
-    if (f.checkValidity()) {
+    const form = e.currentTarget; // https://react-bootstrap.github.io/components/forms/
+    if (form.checkValidity()) {
       console.log('Valid');
+      const { onSaveButtonClick } = this.props;
+      const { target: { name, value } } = e;
+      onSaveButtonClick(name, value);
     } else {
       console.log('Invalid');
     }
@@ -33,7 +35,7 @@ class Form extends Component {
   }
 
   renderAttributes(cardStats) { // attributes = [ [speed,0],[power,2],[weight,220] ]
-    const { handleCardFields } = this.props;
+    const { onInputChange } = this.props;
     const attributes = Object.entries(cardStats);
     return attributes.map((attribute, index) => {
       const attrName = attribute[0];
@@ -45,20 +47,18 @@ class Form extends Component {
           className="mb-3"
           controlId="exampleForm.ControlTextarea1"
         >
-          <RForm.Label column sm="1" data-testid={ `attr${index + 1}-input` }>
+          <RForm.Label column sm="2">
             {attrName}
           </RForm.Label>
           <Col sm="2">
             <RForm.Control
               name={ attrName }
+              data-testid={ `attr${index + 1}-input` }
               type="number"
               value={ attrValue }
               onChange={ ({ target: { name, value } }) => {
-                // os atributos numéricos precisam de um tratamento específico, pois tem mais 1 camda de objeto
-                // cardFiels: { cardStats: {atributes}}
                 const checkValue = Number(value) || 0;
-                const newCardStats = { ...cardStats, [name]: checkValue };
-                handleCardFields('cardStats', newCardStats);
+                onInputChange(name, checkValue);
               } }
               min="1"
               required
@@ -71,27 +71,35 @@ class Form extends Component {
   render() {
     const { validated } = this.state;
     const {
-      handleCardFields,
-      cardFields: {
-        cardName,
-        description,
-        cardStats,
-        cardImage,
-        cardRarity,
-      },
+      onInputChange,
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      isSaveButtonDisabled,
     } = this.props;
-
+    const attributes = { cardAttr1, cardAttr2, cardAttr3 };
     return (
-      <RForm noValidate validated={ validated } onSubmit={ this.handleSubmit }>
+      <RForm
+        noValidate
+        validated={ validated }
+        onSubmit={ this.handleSubmit }
+        className="card-form"
+      >
         <RForm.Group as={ Row } className="mb-3" controlId="FormBasicName">
-          <RForm.Label column sm="1" data-testid="name-input">Card Name</RForm.Label>
-          <Col sm="2">
+          <RForm.Label column sm="2">Card Name</RForm.Label>
+          <Col sm="6">
             <RForm.Control
+              data-testid="name-input"
               name="cardName"
               type="text"
               placeholder="Card Name"
               value={ cardName }
-              onChange={ ({ target: { name, value } }) => handleCardFields(name, value) }
+              onChange={ ({ target: { name, value } }) => onInputChange(name, value) }
               required
             />
           </Col>
@@ -99,42 +107,45 @@ class Form extends Component {
             We'll never share your email with anyone else.
           </Form.Text> */}
         </RForm.Group>
-        {this.renderAttributes(cardStats)}
+
+        {this.renderAttributes(attributes)}
+
         <RForm.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <RForm.Label data-testid="description-input">Description</RForm.Label>
+          <RForm.Label>Description</RForm.Label>
           <RForm.Control
-            name="description"
+            name="cardDescription"
+            data-testid="description-input"
             as="textarea"
             rows={ 6 }
-            style={ { width: '25%' } }
-            onChange={ ({ target: { name, value } }) => handleCardFields(name, value) }
-            value={ description }
+            style={ { width: '95%' } }
+            onChange={ ({ target: { name, value } }) => onInputChange(name, value) }
+            value={ cardDescription }
             required
           />
         </RForm.Group>
         <RForm.Group as={ Row } className="mb-3" controlId="formBasicImagePath">
-          <RForm.Label column sm="1">ImagePath</RForm.Label>
-          <Col sm="2">
+          <RForm.Label column sm="2">ImagePath</RForm.Label>
+          <Col sm="6">
             <RForm.Control
               name="cardImage"
               type="text"
               placeholder="ImagePath"
               data-testid="image-input"
-              onChange={ ({ target: { name, value } }) => handleCardFields(name, value) }
+              onChange={ ({ target: { name, value } }) => onInputChange(name, value) }
               value={ cardImage }
             />
           </Col>
         </RForm.Group>
         <RForm.Group as={ Row } className="mb-3" controlId="inlineFormCustomSelect">
-          <RForm.Label column sm="1">Raridade</RForm.Label>
-          <Col sm="2">
+          <RForm.Label column sm="2">Raridade</RForm.Label>
+          <Col sm="3">
             <RForm.Select
-              name="cardRarity"
+              name="cardRare"
               className="me-sm-2"
               id="inlineFormCustomSelect"
               data-testid="rare-input"
-              onChange={ ({ target: { name, value } }) => handleCardFields(name, value) }
-              value={ cardRarity }
+              onChange={ ({ target: { name, value } }) => onInputChange(name, value) }
+              value={ cardRare }
             >
               {RARITY_OPTIONS.map((rarity, index) => (
                 <option key={ `${rarity}-${index}` } value={ rarity }>{rarity}</option>))}
@@ -143,14 +154,23 @@ class Form extends Component {
         </RForm.Group>
         <RForm.Group className="mb-3" controlId="formBasicCheckbox">
           <RForm.Check
-            name="superTrunfo"
+            name="cardTrunfo"
             type="checkbox"
             label="Super Trunfo"
             data-testid="trunfo-input"
-            onClick={ ({ target: { name, checked } }) => handleCardFields(name, checked) }
+            onClick={ ({ target: { name, checked } }) => onInputChange(name, checked) }
+            checked={ cardTrunfo }
+            variant="dark"
           />
         </RForm.Group>
-        <Button variant="primary" type="submit" data-testid="save-button">
+        <Button
+          variant="dark"
+          type="submit"
+          data-testid="save-button"
+          name="isSaveButtonDisabled"
+          disabled={ isSaveButtonDisabled }
+          size="lg"
+        >
           Save
         </Button>
       </RForm>
@@ -158,17 +178,16 @@ class Form extends Component {
   }
 }
 Form.propTypes = {
-  cardFields: PropTypes.shape({
-    cardName: PropTypes.string,
-    description: PropTypes.string,
-    cardStats: PropTypes.shape({
-      speed: PropTypes.number,
-      power: PropTypes.number,
-      weight: PropTypes.number,
-    }),
-    cardImage: PropTypes.string,
-    cardRarity: PropTypes.string,
-    superTrunfo: PropTypes.bool }).isRequired,
-  handleCardFields: PropTypes.func.isRequired,
-};
+  cardName: PropTypes.string,
+  cardDescription: PropTypes.string,
+  cardAttr1: PropTypes.number,
+  cardAttr2: PropTypes.number,
+  cardAttr3: PropTypes.number,
+  cardImage: PropTypes.string,
+  cardRare: PropTypes.string,
+  cardTrunfo: PropTypes.bool,
+  onInputChange: PropTypes.func,
+  isSaveButtonDisabled: PropTypes.bool,
+  onSaveButtonClick: PropTypes.func,
+}.isRequired;
 export default Form;
