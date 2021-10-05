@@ -174,7 +174,7 @@ describe("5 - Faça a validação do botão de Salvar no formulário", () => {
     expect(saveBtn).toBeDisabled();
   });
 
-  it("Será validado se o botão `salvar` é habilitado ao preencher todos os campos do formulário corretamente.", () => {
+  it.only("Será validado se o botão `salvar` é habilitado ao preencher todos os campos do formulário corretamente.", () => {
     render(<App />);
     const nameInput = screen.getByTestId(/name-input/i);
     const descInput = screen.getByTestId(/description-input/i);

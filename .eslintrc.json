@@ -12,6 +12,6 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react", "sonarjs"
     ]
 }
